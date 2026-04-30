@@ -1,0 +1,57 @@
+Кнопки на сайте не работают, ничего не работает.
+
+В консоли пишет такие ошибки:
+
+__(index):9__ X-Frame-Options may only be set via an HTTP header sent along with a document. It may not be set inside <meta>.
+
+12
+
+Tracking Prevention blocked access to storage for <URL>.
+
+order.js:166 Uncaught SyntaxError: Invalid or unexpected token
+
+__(index):65__ Uncaught ReferenceError: filterData is not defined     at HTMLInputElement.oninput (__(index):65:78__)
+
+2
+
+__(index):56__ Uncaught ReferenceError: openSearch is not defined     at HTMLButtonElement.onclick (__(index):56:62__)
+
+__(index):37__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):37:78__)
+
+2
+
+__(index):38__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):38:81__)
+
+__(index):42__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):42:70__)
+
+__(index):38__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):38:81__)
+
+__(index):37__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):37:78__)
+
+__(index):38__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):38:81__)
+
+__(index):42__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):42:70__)
+
+__(index):38__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):38:81__)
+
+__(index):37__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):37:78__)
+
+__(index):38__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):38:81__)
+
+__(index):42__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):42:70__)
+
+__(index):37__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):37:78__)
+
+__(index):38__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):38:81__)
+
+__(index):42__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):42:70__)
+
+4
+
+__(index):37__ Uncaught ReferenceError: navigate is not defined     at HTMLAnchorElement.onclick (__(index):37:78__)
+
+onclick@__(index):37__
+
+
+
+Исправь пожалуйста это все. Чтобы сайт вновь работал.
