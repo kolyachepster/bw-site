@@ -6,15 +6,17 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-    <title>Blood Wash Studio — Профессиональная озвучка и дубляж</title>
-    <meta name="description" content="Студия фандаба Blood Wash Studio: качественный дубляж, озвучка сериалов, фильмов, мультфильмов и аниме.">
+    <title>Blood Wash Studio вЂ” РџСЂРѕС„РµСЃСЃРёРѕРЅР°Р»СЊРЅР°СЏ РѕР·РІСѓС‡РєР° Рё РґСѓР±Р»СЏР¶</title>
+    <meta name="description" content="РЎС‚СѓРґРёСЏ С„Р°РЅРґР°Р±Р° Blood Wash Studio: РєР°С‡РµСЃС‚РІРµРЅРЅС‹Р№ РґСѓР±Р»СЏР¶, РѕР·РІСѓС‡РєР° СЃРµСЂРёР°Р»РѕРІ, С„РёР»СЊРјРѕРІ, РјСѓР»СЊС‚С„РёР»СЊРјРѕРІ Рё Р°РЅРёРјРµ.">
+    <meta name="keywords" content="РѕР·РІСѓС‡РєР°, РґСѓР±Р»СЏР¶, С„Р°РЅРґР°Р±, Р°РЅРёРјРµ, СЃРµСЂРёР°Р»С‹, С„РёР»СЊРјС‹">
+    <meta name="author" content="Blood Wash Studio">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
-        /* Дополнительные стили для Blood Wash Studio */
+        /* Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СЃС‚РёР»Рё РґР»СЏ Blood Wash Studio */
         :root {
             --blood: #8b0000;
             --accent: #8b0000;
@@ -34,6 +36,57 @@
         .card:hover {
             border-color: var(--blood);
         }
+        .btn-blue {
+            background: #3b82f6;
+        }
+        .btn-purple {
+            background: #a855f7;
+        }
+        .dubin-hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(139,0,0,0.1), rgba(168,85,247,0.05));
+            border-radius: 24px;
+            margin-bottom: 40px;
+        }
+        .order-hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(139,0,0,0.05), rgba(168,85,247,0.05));
+            border-radius: 24px;
+            margin-bottom: 40px;
+        }
+        .order-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .order-type-card {
+            background: var(--card-bg);
+            padding: 28px;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .order-type-card:hover {
+            border-color: var(--blood);
+            transform: translateY(-4px);
+        }
+        .order-price-block {
+            background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(139,0,0,0.05));
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .order-price-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--dub);
+        }
     </style>
 </head>
 <body>
@@ -44,117 +97,113 @@
 <header>
     <div class="logo" onclick="if(window.navigate) navigate('home')">BLOOD<span> WASH</span> STUDIO</div>
     <nav>
-        <a id="n-home" class="nav-link active" href="javascript:void(0)" onclick="if(window.navigate) navigate('home')">Релизы</a>
-        <a id="n-team" class="nav-link" href="javascript:void(0)" onclick="if(window.navigate) navigate('team')">Состав</a>
-        <a id="n-profile" class="nav-link" href="javascript:void(0)" onclick="if(window.navigate) navigate('profile')">Профиль</a>
+        <a id="n-home" class="nav-link active" href="javascript:void(0)" onclick="if(window.navigate) navigate('home')">Р РµР»РёР·С‹</a>
+        <a id="n-team" class="nav-link" href="javascript:void(0)" onclick="if(window.navigate) navigate('team')">РЎРѕСЃС‚Р°РІ</a>
+        <a id="n-profile" class="nav-link" href="javascript:void(0)" onclick="if(window.navigate) navigate('profile')">РџСЂРѕС„РёР»СЊ</a>
         <a id="n-dubin" class="nav-link dub-nav" href="javascript:void(0)" onclick="if(window.navigate) navigate('dubin')" style="display:none;">
             <i class="fas fa-microphone-alt"></i> DUB-in
         </a>
         <a id="n-order" class="nav-link" href="javascript:void(0)" onclick="if(window.navigate) navigate('order')">
-            <i class="fas fa-wand-magic-sparkles"></i> Заказать
+            <i class="fas fa-wand-magic-sparkles"></i> Р—Р°РєР°Р·Р°С‚СЊ
         </a>
     </nav>
 </header>
 
-<script>
-    // Экстренная навигация до загрузки основного скрипта
-    (function() {
-        if (!window.navigate) {
-            window.navigate = function(page) {
-                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-                const target = document.getElementById(page);
-                if (target) target.classList.add('active');
-                if (page !== 'view') history.pushState(null, '', '#' + page);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            };
-        }
-    })();
-</script>
 <main class="container">
 
     <!-- ==================== HOME / RELEASES ==================== -->
     <section id="home" class="section active">
         <div class="search-bar">
             <div class="search-wrap" id="search-wrap">
-                <button class="search-open-btn" id="search-open-btn" onclick="openSearch()" title="Поиск">
+                <button class="search-open-btn" id="search-open-btn" onclick="if(window.openSearch) openSearch()" title="РџРѕРёСЃРє">
                     <i class="fas fa-search"></i>
-                    <span class="search-open-label">Поиск</span>
+                    <span class="search-open-label">РџРѕРёСЃРє</span>
                 </button>
                 <div class="search-field-wrap" id="search-field-wrap">
                     <input type="text" id="main-search" class="search-field-input"
-                           placeholder="Название релиза..."
-                           oninput="filterData()"
+                           placeholder="РќР°Р·РІР°РЅРёРµ СЂРµР»РёР·Р°..."
+                           oninput="if(window.filterData) filterData()"
                            autocomplete="off" name="bws-s"
-                           onkeydown="if(event.key==='Escape')closeSearch()">
-                    <button class="search-close-btn" onclick="closeSearch()" title="Закрыть поиск">
+                           onkeydown="if(event.key==='Escape' && window.closeSearch) closeSearch()">
+                    <button class="search-close-btn" onclick="if(window.closeSearch) closeSearch()" title="Р—Р°РєСЂС‹С‚СЊ РїРѕРёСЃРє">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
             </div>
-            <select id="filter-genre" class="filter-select" onchange="filterData()">
-                <option value="all">Все жанры</option>
-                <option value="Аниме">Аниме</option>
-                <option value="Сериал">Сериалы</option>
-                <option value="Фильм">Фильмы</option>
-                <option value="Мультфильм">Мультфильмы</option>
-                <option value="Трейлер">Трейлеры</option>
-                <option value="Тизер">Тизеры</option>
+            <select id="filter-genre" class="filter-select" onchange="if(window.filterData) filterData()">
+                <option value="all">Р’СЃРµ Р¶Р°РЅСЂС‹</option>
+                <option value="РђРЅРёРјРµ">РђРЅРёРјРµ</option>
+                <option value="РЎРµСЂРёР°Р»">РЎРµСЂРёР°Р»С‹</option>
+                <option value="Р¤РёР»СЊРј">Р¤РёР»СЊРјС‹</option>
+                <option value="РњСѓР»СЊС‚С„РёР»СЊРј">РњСѓР»СЊС‚С„РёР»СЊРјС‹</option>
+                <option value="РўСЂРµР№Р»РµСЂ">РўСЂРµР№Р»РµСЂС‹</option>
+                <option value="РўРёР·РµСЂ">РўРёР·РµСЂС‹</option>
             </select>
-            <select id="filter-sort" class="filter-select" onchange="filterData()">
-                <option value="new">Новинки</option>
-                <option value="pop">Популярные</option>
-                <option value="random">Случайный</option>
+            <select id="filter-sort" class="filter-select" onchange="if(window.filterData) filterData()">
+                <option value="new">РќРѕРІРёРЅРєРё</option>
+                <option value="pop">РџРѕРїСѓР»СЏСЂРЅС‹Рµ</option>
+                <option value="random">РЎР»СѓС‡Р°Р№РЅС‹Р№</option>
             </select>
-            <button id="adm-btn-rel" class="btn btn-blue" style="display:none;" onclick="openRelModal()">
-                <i class="fas fa-plus"></i> Добавить релиз
+            <button id="adm-btn-rel" class="btn btn-blue" style="display:none;" onclick="if(window.openRelModal) openRelModal()">
+                <i class="fas fa-plus"></i> Р”РѕР±Р°РІРёС‚СЊ СЂРµР»РёР·
             </button>
         </div>
-        <div class="grid" id="main-grid"></div>
+        <div class="grid" id="main-grid">
+            <div style="text-align:center; padding:40px; color:var(--text-dim);">
+                <i class="fas fa-spinner fa-spin" style="font-size:2rem;"></i>
+                <p>Р—Р°РіСЂСѓР·РєР° СЂРµР»РёР·РѕРІ...</p>
+            </div>
+        </div>
     </section>
 
     <!-- ==================== TEAM ==================== -->
     <section id="team" class="section">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
-            <h1 style="font-size:1.8rem;font-weight:900;">Команда студии</h1>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <button id="adm-btn-team" class="btn btn-blue" style="display:none;" onclick="openTeamModal()">
-                    <i class="fas fa-user-plus"></i> Участник
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px; flex-wrap:wrap; gap:15px;">
+            <h1 style="font-size:1.8rem; font-weight:900;">РљРѕРјР°РЅРґР° СЃС‚СѓРґРёРё</h1>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button id="adm-btn-team" class="btn btn-blue" style="display:none;" onclick="if(window.openTeamModal) openTeamModal()">
+                    <i class="fas fa-user-plus"></i> РЈС‡Р°СЃС‚РЅРёРє
                 </button>
-                <button id="adm-btn-role" class="btn btn-blue" style="display:none;" onclick="openRoleModal()">
-                    <i class="fas fa-user-shield"></i> Роли
+                <button id="adm-btn-role" class="btn btn-blue" style="display:none;" onclick="if(window.openRoleModal) openRoleModal()">
+                    <i class="fas fa-user-shield"></i> Р РѕР»Рё
                 </button>
             </div>
         </div>
-        <div id="team-wrapper"></div>
+        <div id="team-wrapper">
+            <div style="text-align:center; padding:40px; color:var(--text-dim);">
+                <i class="fas fa-spinner fa-spin" style="font-size:2rem;"></i>
+                <p>Р—Р°РіСЂСѓР·РєР° РєРѕРјР°РЅРґС‹...</p>
+            </div>
+        </div>
     </section>
 
     <!-- ==================== TEAM PAGE ==================== -->
     <section id="team-page" class="section">
-        <button class="btn btn-outline" onclick="navigate('team')" style="margin-bottom:20px;">? Назад</button>
-        <div id="team-page-view" style="background:var(--card-bg);padding:30px;border-radius:18px;border:1px solid var(--border);"></div>
-        <div id="adm-tp-controls" style="display:none;margin-top:16px;gap:10px;flex-wrap:wrap;">
-            <button class="btn btn-blue" onclick="openTPModal()">Редактировать страницу</button>
-            <button class="btn btn-purple" onclick="openAccessModal()"><i class="fas fa-key"></i> Выдать доступ</button>
-            <button class="btn btn-outline" style="color:red;border-color:red;" onclick="deleteTP()">Удалить страницу</button>
+        <button class="btn btn-outline" onclick="if(window.navigate) navigate('team')" style="margin-bottom:20px;">в†ђ РќР°Р·Р°Рґ</button>
+        <div id="team-page-view" style="background:var(--card-bg); padding:30px; border-radius:18px; border:1px solid var(--border);"></div>
+        <div id="adm-tp-controls" style="display:none; margin-top:16px; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn-blue" onclick="if(window.openTPModal) openTPModal()">Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ СЃС‚СЂР°РЅРёС†Сѓ</button>
+            <button class="btn btn-purple" onclick="if(window.openAccessModal) openAccessModal()"><i class="fas fa-key"></i> Р’С‹РґР°С‚СЊ РґРѕСЃС‚СѓРї</button>
+            <button class="btn btn-outline" style="color:red; border-color:red;" onclick="if(window.deleteTP) deleteTP()">РЈРґР°Р»РёС‚СЊ СЃС‚СЂР°РЅРёС†Сѓ</button>
         </div>
-        <div id="own-tp-controls" style="display:none;margin-top:16px;gap:10px;flex-wrap:wrap;">
-            <button class="btn btn-outline" onclick="openMyTPEdit()"><i class="fas fa-pen"></i> Редактировать мою страницу</button>
+        <div id="own-tp-controls" style="display:none; margin-top:16px; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn-outline" onclick="if(window.openMyTPEdit) openMyTPEdit()"><i class="fas fa-pen"></i> Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ РјРѕСЋ СЃС‚СЂР°РЅРёС†Сѓ</button>
         </div>
     </section>
 
     <!-- ==================== VIEW RELEASE ==================== -->
     <section id="view" class="section">
-        <button class="btn btn-outline" onclick="navigate('home')" style="margin-bottom:20px;">? К релизам</button>
+        <button class="btn btn-outline" onclick="if(window.navigate) navigate('home')" style="margin-bottom:20px;">в†ђ Рљ СЂРµР»РёР·Р°Рј</button>
         <div id="v-info"></div>
-        <div style="background:var(--card-bg);padding:22px;border-radius:16px;border:1px solid var(--border);margin-top:20px;">
-            <h4 style="margin-bottom:15px;font-size:1.1rem;">Комментарии (<span id="comm-count">0</span>)</h4>
+        <div style="background:var(--card-bg); padding:22px; border-radius:16px; border:1px solid var(--border); margin-top:20px;">
+            <h4 style="margin-bottom:15px; font-size:1.1rem;">РљРѕРјРјРµРЅС‚Р°СЂРёРё (<span id="comm-count">0</span>)</h4>
             <div id="comm-auth-msg" class="unauth-msg">
-                <p style="margin-bottom:12px;font-weight:bold;">Войдите, чтобы оставить комментарий.</p>
-                <button class="btn btn-blue" onclick="navigate('profile')">Войти / Регистрация</button>
+                <p style="margin-bottom:12px; font-weight:bold;">Р’РѕР№РґРёС‚Рµ, С‡С‚РѕР±С‹ РѕСЃС‚Р°РІРёС‚СЊ РєРѕРјРјРµРЅС‚Р°СЂРёР№.</p>
+                <button class="btn btn-blue" onclick="if(window.navigate) navigate('profile')">Р’РѕР№С‚Рё / Р РµРіРёСЃС‚СЂР°С†РёСЏ</button>
             </div>
-            <div id="comm-form" style="display:none;margin-top:15px;">
-                <textarea id="comm-text" placeholder="Ваш комментарий... Используйте @email для упоминания пользователя" rows="3"></textarea>
-                <button class="btn" onclick="sendComment()">Отправить</button>
+            <div id="comm-form" style="display:none; margin-top:15px;">
+                <textarea id="comm-text" placeholder="Р’Р°С€ РєРѕРјРјРµРЅС‚Р°СЂРёР№... РСЃРїРѕР»СЊР·СѓР№С‚Рµ @email РґР»СЏ СѓРїРѕРјРёРЅР°РЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ" rows="3"></textarea>
+                <button class="btn" onclick="if(window.sendComment) sendComment()">РћС‚РїСЂР°РІРёС‚СЊ</button>
             </div>
             <div id="comm-list" style="margin-top:18px;"></div>
         </div>
@@ -162,26 +211,26 @@
 
     <!-- ==================== PROFILE ==================== -->
     <section id="profile" class="section">
-        <div id="auth-ui" style="max-width:360px;margin:40px auto;">
-            <div style="background:var(--card-bg);padding:36px;border-radius:20px;border:1px solid var(--border);box-shadow:var(--shadow);">
-                <div style="text-align:center;margin-bottom:28px;">
-                    <div style="width:70px;height:70px;background:rgba(139,0,0,0.1);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 15px;font-size:2rem;color:var(--blood);">
+        <div id="auth-ui" style="max-width:360px; margin:40px auto;">
+            <div style="background:var(--card-bg); padding:36px; border-radius:20px; border:1px solid var(--border); box-shadow:var(--shadow);">
+                <div style="text-align:center; margin-bottom:28px;">
+                    <div style="width:70px; height:70px; background:rgba(139,0,0,0.1); border-radius:20px; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; font-size:2rem; color:var(--blood);">
                         <i class="fas fa-tint"></i>
                     </div>
-                    <h2 style="font-size:1.4rem;font-weight:900;">Blood Wash Studio</h2>
-                    <p style="color:var(--text-dim);font-size:13px;margin-top:5px;">Войдите или зарегистрируйтесь</p>
+                    <h2 style="font-size:1.4rem; font-weight:900;">Blood Wash Studio</h2>
+                    <p style="color:var(--text-dim); font-size:13px; margin-top:5px;">Р’РѕР№РґРёС‚Рµ РёР»Рё Р·Р°СЂРµРіРёСЃС‚СЂРёСЂСѓР№С‚РµСЃСЊ</p>
                 </div>
                 <form onsubmit="return false;" autocomplete="off">
                     <input type="text" id="auth-honeypot" name="auth-honeypot" style="display:none" autocomplete="username" tabindex="-1">
-                    <label for="email">Email</label>
+                    <label for="email" style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:5px; display:block;">Email</label>
                     <input type="email" id="email" placeholder="mail@example.com" autocomplete="username" style="margin-bottom:14px;">
-                    <label for="pass">Пароль</label>
-                    <input type="password" id="pass" placeholder="Минимум 6 символов" autocomplete="current-password" style="margin-bottom:16px;">
-                    <button class="btn" style="width:100%;margin-bottom:10px;" id="btn-login" type="button"><i class="fas fa-sign-in-alt"></i> Войти</button>
-                    <button class="btn btn-outline" style="width:100%;margin-bottom:10px;" id="btn-reg" type="button"><i class="fas fa-user-plus"></i> Регистрация</button>
+                    <label for="pass" style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:5px; display:block;">РџР°СЂРѕР»СЊ</label>
+                    <input type="password" id="pass" placeholder="РњРёРЅРёРјСѓРј 6 СЃРёРјРІРѕР»РѕРІ" autocomplete="current-password" style="margin-bottom:16px;">
+                    <button class="btn" style="width:100%; margin-bottom:10px;" id="btn-login" type="button"><i class="fas fa-sign-in-alt"></i> Р’РѕР№С‚Рё</button>
+                    <button class="btn btn-outline" style="width:100%; margin-bottom:10px;" id="btn-reg" type="button"><i class="fas fa-user-plus"></i> Р РµРіРёСЃС‚СЂР°С†РёСЏ</button>
                 </form>
-                <div id="reset-pass-block" style="display:none;text-align:center;margin-top:5px;">
-                    <a href="#" style="color:var(--text-dim);font-size:12px;" onclick="resetPassword();return false;">Забыли пароль?</a>
+                <div id="reset-pass-block" style="display:none; text-align:center; margin-top:5px;">
+                    <a href="#" style="color:var(--text-dim); font-size:12px;" onclick="if(window.resetPassword) resetPassword(); return false;">Р—Р°Р±С‹Р»Рё РїР°СЂРѕР»СЊ?</a>
                 </div>
             </div>
         </div>
@@ -190,37 +239,41 @@
             <div class="profile-header">
                 <div style="position:relative;">
                     <img id="u-ava" src="https://api.dicebear.com/7.x/identicon/svg"
-                         style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid var(--blood);">
+                         style="width:110px; height:110px; border-radius:50%; object-fit:cover; border:3px solid var(--blood);">
                 </div>
                 <div style="flex:1;">
-                    <h2 id="u-nick" style="margin-bottom:8px;font-size:1.8rem;font-weight:900;"></h2>
+                    <h2 id="u-nick" style="margin-bottom:8px; font-size:1.8rem; font-weight:900;"></h2>
                     <div id="u-role-badge" style="margin-bottom:12px;"></div>
-                    <div style="display:flex;gap:25px;font-size:13px;flex-wrap:wrap;">
-                        <div><b id="u-views" style="font-size:1.4rem;">0</b><br><span>Просмотрено</span></div>
-                        <div style="cursor:pointer;" onclick="showMySubscribers()"><b id="u-subs" style="font-size:1.4rem;">0</b><br><span>Подписчики</span></div>
+                    <div style="display:flex; gap:25px; font-size:13px; flex-wrap:wrap;">
+                        <div><b id="u-views" style="font-size:1.4rem;">0</b><br><span style="color:var(--text-dim); font-size:11px;">РџСЂРѕСЃРјРѕС‚СЂРµРЅРѕ</span></div>
+                        <div style="cursor:pointer;" onclick="if(window.showMySubscribers) showMySubscribers()"><b id="u-subs" style="font-size:1.4rem;">0</b><br><span style="color:var(--text-dim); font-size:11px;">РџРѕРґРїРёСЃС‡РёРєРё</span></div>
                     </div>
                 </div>
-                <div style="display:flex;flex-direction:column;gap:10px;min-width:180px;">
-                    <button class="btn btn-outline" onclick="document.getElementById('m-prof').style.display='flex'"><i class="fas fa-cog"></i> Настройки</button>
-                    <button class="btn btn-outline" onclick="openAchInventory()"><i class="fas fa-medal"></i> Достижения</button>
-                    <button class="btn btn-outline" onclick="document.getElementById('m-public-prof').style.display='flex'"><i class="fas fa-user-edit"></i> Мой профиль</button>
-                    <button class="btn btn-outline" id="btn-logout"><i class="fas fa-sign-out-alt"></i> Выйти</button>
+                <div style="display:flex; flex-direction:column; gap:10px; min-width:180px;">
+                    <button class="btn btn-outline" onclick="document.getElementById('m-prof').style.display='flex'"><i class="fas fa-cog"></i> РќР°СЃС‚СЂРѕР№РєРё</button>
+                    <button class="btn btn-outline" onclick="if(window.openAchInventory) openAchInventory()"><i class="fas fa-medal"></i> Р”РѕСЃС‚РёР¶РµРЅРёСЏ</button>
+                    <button class="btn btn-outline" onclick="document.getElementById('m-public-prof').style.display='flex'"><i class="fas fa-user-edit"></i> РњРѕР№ РїСЂРѕС„РёР»СЊ</button>
+                    <button class="btn btn-outline" id="btn-logout"><i class="fas fa-sign-out-alt"></i> Р’С‹Р№С‚Рё</button>
                 </div>
             </div>
-            <div style="background:var(--card-bg);padding:22px;border-radius:16px;border:1px solid var(--border);margin-bottom:20px;">
-                <h4>Мои достижения</h4>
-                <div id="u-ach" style="display:flex;gap:10px;flex-wrap:wrap;"></div>
+
+            <div style="background:var(--card-bg); padding:22px; border-radius:16px; border:1px solid var(--border); margin-bottom:20px;">
+                <h4 style="font-size:15px; margin-bottom:14px;">РњРѕРё РґРѕСЃС‚РёР¶РµРЅРёСЏ</h4>
+                <div id="u-ach" style="display:flex; gap:10px; flex-wrap:wrap;"></div>
             </div>
-            <div style="background:var(--card-bg);padding:22px;border-radius:16px;border:1px solid var(--border);margin-bottom:20px;">
-                <h4><i class="fas fa-bookmark" style="color:var(--blood);margin-right:6px;"></i> Мои списки</h4>
-                <div id="my-lists-wrap"><p>Загрузка...</p></div>
+
+            <div style="background:var(--card-bg); padding:22px; border-radius:16px; border:1px solid var(--border); margin-bottom:20px;">
+                <h4 style="font-size:15px; margin-bottom:18px;"><i class="fas fa-bookmark" style="color:var(--blood); margin-right:6px;"></i> РњРѕРё СЃРїРёСЃРєРё</h4>
+                <div id="my-lists-wrap"><p style="font-size:13px; color:var(--text-dim);">Р—Р°РіСЂСѓР·РєР°...</p></div>
             </div>
-            <div id="adm-ach-panel" style="display:none;background:rgba(56,151,240,0.06);padding:22px;border-radius:16px;border:1px dashed rgba(56,151,240,0.3);margin-bottom:20px;">
-                <p>Панель администратора</p>
-                <button class="btn btn-blue" onclick="document.getElementById('m-give-ach').style.display='flex'"><i class="fas fa-award"></i> Выдать ачивку</button>
+
+            <div id="adm-ach-panel" style="display:none; background:rgba(56,151,240,0.06); padding:22px; border-radius:16px; border:1px dashed rgba(56,151,240,0.3); margin-bottom:20px;">
+                <p style="font-size:11px; color:var(--admin); margin-bottom:12px; font-weight:900; text-transform:uppercase; letter-spacing:1px;">РџР°РЅРµР»СЊ Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂР°</p>
+                <button class="btn btn-blue" onclick="document.getElementById('m-give-ach').style.display='flex'"><i class="fas fa-award"></i> Р’С‹РґР°С‚СЊ Р°С‡РёРІРєСѓ</button>
             </div>
-            <div style="text-align:center;padding:30px 0;border-top:1px solid var(--border);margin-top:20px;">
-                <a href="javascript:void(0)" onclick="openPrivacy()">Политика конфиденциальности</a>
+
+            <div style="text-align:center; padding:30px 0; border-top:1px solid var(--border); margin-top:20px;">
+                <a href="javascript:void(0)" onclick="if(window.openPrivacy) openPrivacy()" style="color:var(--text-dim); font-size:11px; text-decoration:none; letter-spacing:2px; text-transform:uppercase; font-weight:700;">РџРѕР»РёС‚РёРєР° РєРѕРЅС„РёРґРµРЅС†РёР°Р»СЊРЅРѕСЃС‚Рё</a>
             </div>
         </div>
     </section>
@@ -228,54 +281,54 @@
     <!-- ==================== DUB-IN ==================== -->
     <section id="dubin" class="section">
         <div class="dubin-hero">
-            <div>
-                <div>
-                    <i class="fas fa-microphone-alt"></i> Blood Wash Studio — DUB-in
+            <div style="position:relative; z-index:2;">
+                <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(168,85,247,0.15); border:1px solid rgba(168,85,247,0.3); border-radius:20px; padding:6px 16px; font-size:11px; font-weight:800; color:var(--dub); text-transform:uppercase; letter-spacing:2px; margin-bottom:18px;">
+                    <i class="fas fa-microphone-alt"></i> Blood Wash Studio вЂ” DUB-in
                 </div>
-                <h1>Студийная Платформа</h1>
-                <p>Загружайте и скачивайте материалы для работы над озвучкой.</p>
+                <h1 style="font-size:2.2rem; font-weight:900; margin-bottom:12px; letter-spacing:-1px;">РЎС‚СѓРґРёР№РЅР°СЏ РџР»Р°С‚С„РѕСЂРјР°</h1>
+                <p style="color:var(--text-dim); max-width:600px; line-height:1.7; font-size:15px;">Р—Р°РіСЂСѓР¶Р°Р№С‚Рµ Рё СЃРєР°С‡РёРІР°Р№С‚Рµ РјР°С‚РµСЂРёР°Р»С‹ РґР»СЏ СЂР°Р±РѕС‚С‹ РЅР°Рґ РѕР·РІСѓС‡РєРѕР№.</p>
             </div>
         </div>
         <div id="dubin-files-panel" style="display:none;">
-            <div>
-                <h2>?? Архив проектов</h2>
-                <button id="dubin-adm-add-project" class="btn btn-blue" style="display:none;" onclick="openDubinProjectModal()">
-                    <i class="fas fa-plus"></i> Добавить проект
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; flex-wrap:wrap; gap:12px;">
+                <h2 style="font-size:1.4rem; font-weight:900;">рџ“Ѓ РђСЂС…РёРІ РїСЂРѕРµРєС‚РѕРІ</h2>
+                <button id="dubin-adm-add-project" class="btn btn-blue" style="display:none;" onclick="if(window.openDubinProjectModal) openDubinProjectModal()">
+                    <i class="fas fa-plus"></i> Р”РѕР±Р°РІРёС‚СЊ РїСЂРѕРµРєС‚
                 </button>
             </div>
             <div id="dubin-projects-list"></div>
         </div>
         <div id="dubin-suggest-panel">
             <div class="request-form">
-                <h2><i class="fas fa-lightbulb"></i> Предложить проект для озвучки</h2>
-                <p>Хотите, чтобы мы озвучили ваш любимый сериал, аниме или фильм?</p>
-                <label>Название *</label>
-                <input type="text" id="sug-title" placeholder="Например: Атака Титанов...">
-                <label>Тип контента *</label>
-                <select id="sug-type">
-                    <option value="">— Выберите тип —</option>
-                    <option value="Аниме">Аниме</option>
-                    <option value="Сериал">Сериал</option>
-                    <option value="Фильм">Фильм</option>
-                    <option value="Мультфильм">Мультфильм</option>
-                    <option value="Другое">Другое</option>
+                <h2 style="font-size:1.4rem; font-weight:900; margin-bottom:8px;"><i class="fas fa-lightbulb" style="color:var(--blood);"></i> РџСЂРµРґР»РѕР¶РёС‚СЊ РїСЂРѕРµРєС‚ РґР»СЏ РѕР·РІСѓС‡РєРё</h2>
+                <p style="color:var(--text-dim); font-size:13px; margin-bottom:22px; line-height:1.6;">РҐРѕС‚РёС‚Рµ, С‡С‚РѕР±С‹ РјС‹ РѕР·РІСѓС‡РёР»Рё РІР°С€ Р»СЋР±РёРјС‹Р№ СЃРµСЂРёР°Р», Р°РЅРёРјРµ РёР»Рё С„РёР»СЊРј?</p>
+                <label style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:6px;">РќР°Р·РІР°РЅРёРµ *</label>
+                <input type="text" id="sug-title" placeholder="РќР°РїСЂРёРјРµСЂ: РђС‚Р°РєР° РўРёС‚Р°РЅРѕРІ...">
+                <label style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:6px;">РўРёРї РєРѕРЅС‚РµРЅС‚Р° *</label>
+                <select id="sug-type" style="margin-bottom:12px;">
+                    <option value="">вЂ” Р’С‹Р±РµСЂРёС‚Рµ С‚РёРї вЂ”</option>
+                    <option value="РђРЅРёРјРµ">РђРЅРёРјРµ</option>
+                    <option value="РЎРµСЂРёР°Р»">РЎРµСЂРёР°Р»</option>
+                    <option value="Р¤РёР»СЊРј">Р¤РёР»СЊРј</option>
+                    <option value="РњСѓР»СЊС‚С„РёР»СЊРј">РњСѓР»СЊС‚С„РёР»СЊРј</option>
+                    <option value="Р”СЂСѓРіРѕРµ">Р”СЂСѓРіРѕРµ</option>
                 </select>
-                <label>Ссылка (трейлер, MAL...)</label>
+                <label style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:6px;">РЎСЃС‹Р»РєР° (С‚СЂРµР№Р»РµСЂ, MAL...)</label>
                 <input type="text" id="sug-link" placeholder="https://...">
-                <label>Почему именно это? *</label>
-                <textarea id="sug-reason" placeholder="Расскажите, почему этот проект заслуживает внимания..." rows="4"></textarea>
+                <label style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:6px;">РџРѕС‡РµРјСѓ РёРјРµРЅРЅРѕ СЌС‚Рѕ? *</label>
+                <textarea id="sug-reason" placeholder="Р Р°СЃСЃРєР°Р¶РёС‚Рµ, РїРѕС‡РµРјСѓ СЌС‚РѕС‚ РїСЂРѕРµРєС‚ Р·Р°СЃР»СѓР¶РёРІР°РµС‚ РІРЅРёРјР°РЅРёСЏ..." rows="4"></textarea>
                 <div id="sug-name-block" style="display:none;">
-                    <input type="text" id="sug-name" placeholder="Ваше имя / никнейм">
+                    <input type="text" id="sug-name" placeholder="Р’Р°С€Рµ РёРјСЏ / РЅРёРєРЅРµР№Рј">
                     <input type="email" id="sug-email" placeholder="your@email.com">
                 </div>
-                <button class="btn" style="width:100%;" onclick="sendSuggestion()"><i class="fas fa-paper-plane"></i> Отправить предложение</button>
+                <button class="btn" style="width:100%;" onclick="if(window.sendSuggestion) sendSuggestion()"><i class="fas fa-paper-plane"></i> РћС‚РїСЂР°РІРёС‚СЊ РїСЂРµРґР»РѕР¶РµРЅРёРµ</button>
             </div>
-            <div id="join-cta-block" style="margin-top:24px;text-align:center;">
-                <div>???</div>
-                <h3>Хотите стать частью команды?</h3>
-                <p>Если вы хотите попробовать себя в роли актёра дубляжа, звукорежиссёра или сценариста — заполните анкету.</p>
-                <a href="https://forms.gle/YOUR_GOOGLE_FORM_ID" target="_blank" class="btn">
-                    <i class="fas fa-user-plus"></i> Подать заявку
+            <div id="join-cta-block" style="margin-top:24px; background:linear-gradient(135deg,rgba(139,0,0,0.08),rgba(168,85,247,0.06)); border:1px solid rgba(139,0,0,0.2); border-radius:18px; padding:28px; text-align:center;">
+                <div style="font-size:2.5rem; margin-bottom:12px;">рџЋ™пёЏ</div>
+                <h3 style="margin-bottom:8px; font-size:1.2rem;">РҐРѕС‚РёС‚Рµ СЃС‚Р°С‚СЊ С‡Р°СЃС‚СЊСЋ РєРѕРјР°РЅРґС‹?</h3>
+                <p style="color:var(--text-dim); font-size:13px; margin-bottom:20px; line-height:1.6;">Р•СЃР»Рё РІС‹ С…РѕС‚РёС‚Рµ РїРѕРїСЂРѕР±РѕРІР°С‚СЊ СЃРµР±СЏ РІ СЂРѕР»Рё Р°РєС‚С‘СЂР° РґСѓР±Р»СЏР¶Р°, Р·РІСѓРєРѕСЂРµР¶РёСЃСЃС‘СЂР° РёР»Рё СЃС†РµРЅР°СЂРёСЃС‚Р° вЂ” Р·Р°РїРѕР»РЅРёС‚Рµ Р°РЅРєРµС‚Сѓ.</p>
+                <a href="https://forms.gle/YOUR_GOOGLE_FORM_ID" target="_blank" class="btn" style="text-decoration:none; font-size:14px;">
+                    <i class="fas fa-user-plus"></i> РџРѕРґР°С‚СЊ Р·Р°СЏРІРєСѓ
                 </a>
             </div>
         </div>
@@ -284,62 +337,159 @@
     <!-- ==================== ORDER ==================== -->
     <section id="order" class="section">
         <div class="order-hero">
-            <div><i class="fas fa-microphone-alt"></i> Blood Wash Studio</div>
-            <h1>Заказать озвучку</h1>
-            <p>Хотите, чтобы мы озвучили ваш любимый проект? Выберите тип предложения.</p>
+            <div class="order-hero-badge" style="display:inline-flex; align-items:center; gap:8px; background:rgba(139,0,0,0.1); border-radius:20px; padding:6px 16px; margin-bottom:18px;">
+                <i class="fas fa-microphone-alt"></i> Blood Wash Studio
+            </div>
+            <h1 style="font-size:2rem; font-weight:900; margin-bottom:12px;">Р—Р°РєР°Р·Р°С‚СЊ РѕР·РІСѓС‡РєСѓ</h1>
+            <p style="color:var(--text-dim);">РҐРѕС‚РёС‚Рµ, С‡С‚РѕР±С‹ РјС‹ РѕР·РІСѓС‡РёР»Рё РІР°С€ Р»СЋР±РёРјС‹Р№ РїСЂРѕРµРєС‚? Р’С‹Р±РµСЂРёС‚Рµ С‚РёРї РїСЂРµРґР»РѕР¶РµРЅРёСЏ.</p>
         </div>
 
         <div class="order-type-grid" id="order-type-grid">
-            <div class="order-type-card" onclick="selectOrderType('free')">
-                <div><i class="fas fa-heart" style="color:#22c55e;"></i></div>
-                <h3>Бесплатное предложение</h3>
-                <p>Предложите проект для озвучки — мы сами решим, берёмся ли за него. Без оплаты.</p>
-                <div>Бесплатно</div>
+            <div class="order-type-card" onclick="if(window.selectOrderType) selectOrderType('free')">
+                <div style="font-size:2rem; margin-bottom:12px;">
+                    <i class="fas fa-heart" style="color:#22c55e;"></i>
+                </div>
+                <h3 style="margin-bottom:8px;">Р‘РµСЃРїР»Р°С‚РЅРѕРµ РїСЂРµРґР»РѕР¶РµРЅРёРµ</h3>
+                <p style="color:var(--text-dim); font-size:13px;">РџСЂРµРґР»РѕР¶РёС‚Рµ РїСЂРѕРµРєС‚ РґР»СЏ РѕР·РІСѓС‡РєРё вЂ” РјС‹ СЃР°РјРё СЂРµС€РёРј, Р±РµСЂС‘РјСЃСЏ Р»Рё Р·Р° РЅРµРіРѕ. Р‘РµР· РѕРїР»Р°С‚С‹.</p>
+                <div style="margin-top:12px; padding:4px 12px; background:rgba(34,197,94,0.15); border-radius:20px; display:inline-block; font-size:11px; font-weight:700; color:#22c55e;">Р‘РµСЃРїР»Р°С‚РЅРѕ</div>
             </div>
-            <div class="order-type-card" onclick="selectOrderType('paid')">
-                <div><i class="fas fa-star" style="color:var(--dub);"></i></div>
-                <h3>Платный заказ</h3>
-                <p>Закажите озвучку приоритетно. Чем подробнее проект — тем точнее цена. Переходим в Telegram.</p>
-                <div>Платно · В Telegram</div>
+            <div class="order-type-card" onclick="if(window.selectOrderType) selectOrderType('paid')">
+                <div style="font-size:2rem; margin-bottom:12px;">
+                    <i class="fas fa-star" style="color:var(--dub);"></i>
+                </div>
+                <h3 style="margin-bottom:8px;">РџР»Р°С‚РЅС‹Р№ Р·Р°РєР°Р·</h3>
+                <p style="color:var(--text-dim); font-size:13px;">Р—Р°РєР°Р¶РёС‚Рµ РѕР·РІСѓС‡РєСѓ РїСЂРёРѕСЂРёС‚РµС‚РЅРѕ. Р§РµРј РїРѕРґСЂРѕР±РЅРµРµ РїСЂРѕРµРєС‚ вЂ” С‚РµРј С‚РѕС‡РЅРµРµ С†РµРЅР°. РџРµСЂРµС…РѕРґРёРј РІ Telegram.</p>
+                <div style="margin-top:12px; padding:4px 12px; background:rgba(168,85,247,0.15); border-radius:20px; display:inline-block; font-size:11px; font-weight:700; color:var(--dub);">РџР»Р°С‚РЅРѕ В· Р’ Telegram</div>
             </div>
         </div>
 
-        <div id="order-free-form" class="order-form-wrap" style="display:none;">
-            <div>
-                <button class="btn btn-outline btn-sm" onclick="backToOrderType()">? Назад</button>
-                <h2><i class="fas fa-heart" style="color:#22c55e;"></i>Бесплатное предложение</h2>
+        <div id="order-free-form" style="display:none;">
+            <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px; flex-wrap:wrap;">
+                <button class="btn btn-outline btn-sm" onclick="if(window.backToOrderType) backToOrderType()">в†ђ РќР°Р·Р°Рґ</button>
+                <h2 style="font-size:1.3rem;"><i class="fas fa-heart" style="color:#22c55e; margin-right:8px;"></i>Р‘РµСЃРїР»Р°С‚РЅРѕРµ РїСЂРµРґР»РѕР¶РµРЅРёРµ</h2>
             </div>
-            <div class="order-form-card">
-                <div><label>Название проекта *</label><input type="text" id="ord-free-title" placeholder="Например: Атака Титанов..."></div>
-                <div>
-                    <div><label>Тип контента *</label><select id="ord-free-type"><option value="">— Выберите —</option><option value="Аниме">Аниме</option><option value="Сериал">Сериал</option><option value="Фильм">Фильм</option><option value="Мультфильм">Мультфильм</option><option value="Другое">Другое</option></select></div>
-                    <div><label>Ссылка (MAL, трейлер...)</label><input type="text" id="ord-free-link" placeholder="https://..."></div>
+            <div style="background:var(--card-bg); border-radius:20px; padding:24px; border:1px solid var(--border);">
+                <div style="margin-bottom:16px;">
+                    <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">РќР°Р·РІР°РЅРёРµ РїСЂРѕРµРєС‚Р° *</label>
+                    <input type="text" id="ord-free-title" placeholder="РќР°РїСЂРёРјРµСЂ: РђС‚Р°РєР° РўРёС‚Р°РЅРѕРІ...">
                 </div>
-                <div><label>Почему именно этот проект? *</label><textarea id="ord-free-reason" rows="4" placeholder="Расскажите, чем он особенный..."></textarea></div>
-                <div>
-                    <div><label>Ваш никнейм / имя</label><input type="text" id="ord-free-name" placeholder="Аноним"></div>
-                    <div><label>Email (необязательно)</label><input type="email" id="ord-free-email" placeholder="mail@example.com"></div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                    <div>
+                        <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">РўРёРї РєРѕРЅС‚РµРЅС‚Р° *</label>
+                        <select id="ord-free-type">
+                            <option value="">вЂ” Р’С‹Р±РµСЂРёС‚Рµ вЂ”</option>
+                            <option value="РђРЅРёРјРµ">РђРЅРёРјРµ</option>
+                            <option value="РЎРµСЂРёР°Р»">РЎРµСЂРёР°Р»</option>
+                            <option value="Р¤РёР»СЊРј">Р¤РёР»СЊРј</option>
+                            <option value="РњСѓР»СЊС‚С„РёР»СЊРј">РњСѓР»СЊС‚С„РёР»СЊРј</option>
+                            <option value="Р”СЂСѓРіРѕРµ">Р”СЂСѓРіРѕРµ</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">РЎСЃС‹Р»РєР° (MAL, С‚СЂРµР№Р»РµСЂ...)</label>
+                        <input type="text" id="ord-free-link" placeholder="https://...">
+                    </div>
                 </div>
-                <button class="btn" style="width:100%;" onclick="submitFreeOrder()"><i class="fas fa-paper-plane"></i> Отправить предложение</button>
+                <div style="margin-bottom:16px;">
+                    <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">РџРѕС‡РµРјСѓ РёРјРµРЅРЅРѕ СЌС‚РѕС‚ РїСЂРѕРµРєС‚? *</label>
+                    <textarea id="ord-free-reason" rows="4" placeholder="Р Р°СЃСЃРєР°Р¶РёС‚Рµ, С‡РµРј РѕРЅ РѕСЃРѕР±РµРЅРЅС‹Р№..."></textarea>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;">
+                    <div>
+                        <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">Р’Р°С€ РЅРёРєРЅРµР№Рј / РёРјСЏ</label>
+                        <input type="text" id="ord-free-name" placeholder="РђРЅРѕРЅРёРј">
+                    </div>
+                    <div>
+                        <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">Email (РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅРѕ)</label>
+                        <input type="email" id="ord-free-email" placeholder="mail@example.com">
+                    </div>
+                </div>
+                <button class="btn" style="width:100%;" onclick="if(window.submitFreeOrder) submitFreeOrder()"><i class="fas fa-paper-plane"></i> РћС‚РїСЂР°РІРёС‚СЊ РїСЂРµРґР»РѕР¶РµРЅРёРµ</button>
             </div>
         </div>
 
-        <div id="order-paid-form" class="order-form-wrap" style="display:none;">
-            <div>
-                <button class="btn btn-outline btn-sm" onclick="backToOrderType()">? Назад</button>
-                <h2><i class="fas fa-star" style="color:var(--dub);"></i>Платный заказ</h2>
+        <div id="order-paid-form" style="display:none;">
+            <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px; flex-wrap:wrap;">
+                <button class="btn btn-outline btn-sm" onclick="if(window.backToOrderType) backToOrderType()">в†ђ РќР°Р·Р°Рґ</button>
+                <h2 style="font-size:1.3rem;"><i class="fas fa-star" style="color:var(--dub); margin-right:8px;"></i>РџР»Р°С‚РЅС‹Р№ Р·Р°РєР°Р·</h2>
             </div>
-            <div class="order-form-card">
-                <div><i class="fab fa-telegram-plane"></i><div><p>Заказ оформляется через Telegram</p><p>Заполните форму — мы сгенерируем сообщение и откроем Telegram-бота.</p></div></div>
-                <div><label>Название проекта *</label><input type="text" id="ord-paid-title" placeholder="Полное название"></div>
-                <div><div><label>Тип контента *</label><select id="ord-paid-type" onchange="calcOrderPrice()"><option value="">— Выберите —</option><option value="Аниме">Аниме</option><option value="Сериал">Сериал</option><option value="Фильм">Фильм</option><option value="Мультфильм">Мультфильм</option><option value="Другое">Другое</option></select></div><div><label>Жанр</label><input type="text" id="ord-paid-genre" placeholder="Боевик, Романтика..." oninput="calcOrderPrice()"></div></div>
-                <div><div><label>Год выхода</label><input type="number" id="ord-paid-year" placeholder="2020" min="1950" max="2030" oninput="calcOrderPrice()"></div><div><label>Количество серий / частей</label><input type="number" id="ord-paid-episodes" placeholder="12" min="1" oninput="calcOrderPrice()"></div></div>
-                <div><div><label>Длительность (мин)</label><input type="number" id="ord-paid-duration" placeholder="24" min="1" oninput="calcOrderPrice()"></div><div><label>Популярность</label><select id="ord-paid-popularity" onchange="calcOrderPrice()"><option value="unknown">Малоизвестный</option><option value="medium">Средняя аудитория</option><option value="popular">Популярный</option><option value="top">Топ / Легенда</option></select></div></div>
-                <div><label>Качество исходника</label><select id="ord-paid-quality" onchange="calcOrderPrice()"><option value="low">Низкое (360p–480p)</option><option value="medium" selected>Среднее (720p)</option><option value="high">Высокое (1080p)</option><option value="ultra">Ультра (4K)</option></select></div>
-                <div><label>Ссылка на проект (MAL, трейлер...)</label><input type="text" id="ord-paid-link" placeholder="https://..."></div>
-                <div><label>Дополнительные пожелания</label><textarea id="ord-paid-notes" rows="3" placeholder="Особые требования, сроки, что важно..."></textarea></div>
-                <div class="order-price-block"><div>Ориентировочная стоимость</div><div id="order-price-value">— ?</div><div>Точная цена обсуждается в Telegram</div></div>
-                <button class="btn btn-purple" style="width:100%;" onclick="submitPaidOrder()"><i class="fab fa-telegram-plane"></i> Перейти в Telegram-бота</button>
+            <div style="background:var(--card-bg); border-radius:20px; padding:24px; border:1px solid var(--border);">
+                <div style="background:rgba(44,165,224,0.1); border-radius:12px; padding:16px; display:flex; gap:12px; align-items:center; margin-bottom:24px;">
+                    <i class="fab fa-telegram-plane" style="font-size:28px; color:#2CA5E0;"></i>
+                    <div>
+                        <p style="font-weight:700; margin-bottom:2px;">Р—Р°РєР°Р· РѕС„РѕСЂРјР»СЏРµС‚СЃСЏ С‡РµСЂРµР· Telegram</p>
+                        <p style="font-size:12px; color:var(--text-dim);">Р—Р°РїРѕР»РЅРёС‚Рµ С„РѕСЂРјСѓ вЂ” РјС‹ СЃРіРµРЅРµСЂРёСЂСѓРµРј СЃРѕРѕР±С‰РµРЅРёРµ Рё РѕС‚РєСЂРѕРµРј Telegram. РўР°Рј РІС‹ РІС‹Р±РµСЂРµС‚Рµ СЃРїРѕСЃРѕР± РѕРїР»Р°С‚С‹ Рё РѕР±СЃСѓРґРёС‚Рµ РґРµС‚Р°Р»Рё.</p>
+                    </div>
+                </div>
+                <div style="margin-bottom:16px;">
+                    <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">РќР°Р·РІР°РЅРёРµ РїСЂРѕРµРєС‚Р° *</label>
+                    <input type="text" id="ord-paid-title" placeholder="РџРѕР»РЅРѕРµ РЅР°Р·РІР°РЅРёРµ">
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                    <div>
+                        <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">РўРёРї РєРѕРЅС‚РµРЅС‚Р° *</label>
+                        <select id="ord-paid-type" onchange="if(window.calcOrderPrice) calcOrderPrice()">
+                            <option value="">вЂ” Р’С‹Р±РµСЂРёС‚Рµ вЂ”</option>
+                            <option value="РђРЅРёРјРµ">РђРЅРёРјРµ</option>
+                            <option value="РЎРµСЂРёР°Р»">РЎРµСЂРёР°Р»</option>
+                            <option value="Р¤РёР»СЊРј">Р¤РёР»СЊРј</option>
+                            <option value="РњСѓР»СЊС‚С„РёР»СЊРј">РњСѓР»СЊС‚С„РёР»СЊРј</option>
+                            <option value="Р”СЂСѓРіРѕРµ">Р”СЂСѓРіРѕРµ</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">Р–Р°РЅСЂ</label>
+                        <input type="text" id="ord-paid-genre" placeholder="Р‘РѕРµРІРёРє, Р РѕРјР°РЅС‚РёРєР°..." oninput="if(window.calcOrderPrice) calcOrderPrice()">
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                    <div>
+                        <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">Р“РѕРґ РІС‹С…РѕРґР°</label>
+                        <input type="number" id="ord-paid-year" placeholder="2020" min="1950" max="2030" oninput="if(window.calcOrderPrice) calcOrderPrice()">
+                    </div>
+                    <div>
+                        <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">РљРѕР»РёС‡РµСЃС‚РІРѕ СЃРµСЂРёР№</label>
+                        <input type="number" id="ord-paid-episodes" placeholder="12" min="1" oninput="if(window.calcOrderPrice) calcOrderPrice()">
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                    <div>
+                        <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ (РјРёРЅ)</label>
+                        <input type="number" id="ord-paid-duration" placeholder="24" min="1" oninput="if(window.calcOrderPrice) calcOrderPrice()">
+                    </div>
+                    <div>
+                        <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">РџРѕРїСѓР»СЏСЂРЅРѕСЃС‚СЊ</label>
+                        <select id="ord-paid-popularity" onchange="if(window.calcOrderPrice) calcOrderPrice()">
+                            <option value="unknown">РњР°Р»РѕРёР·РІРµСЃС‚РЅС‹Р№</option>
+                            <option value="medium">РЎСЂРµРґРЅСЏСЏ Р°СѓРґРёС‚РѕСЂРёСЏ</option>
+                            <option value="popular">РџРѕРїСѓР»СЏСЂРЅС‹Р№</option>
+                            <option value="top">РўРѕРї / Р›РµРіРµРЅРґР°</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-bottom:16px;">
+                    <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">РљР°С‡РµСЃС‚РІРѕ РёСЃС…РѕРґРЅРёРєР°</label>
+                    <select id="ord-paid-quality" onchange="if(window.calcOrderPrice) calcOrderPrice()">
+                        <option value="low">РќРёР·РєРѕРµ (360pвЂ“480p)</option>
+                        <option value="medium" selected>РЎСЂРµРґРЅРµРµ (720p)</option>
+                        <option value="high">Р’С‹СЃРѕРєРѕРµ (1080p)</option>
+                        <option value="ultra">РЈР»СЊС‚СЂР° (4K)</option>
+                    </select>
+                </div>
+                <div style="margin-bottom:16px;">
+                    <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">РЎСЃС‹Р»РєР° РЅР° РїСЂРѕРµРєС‚</label>
+                    <input type="text" id="ord-paid-link" placeholder="https://...">
+                </div>
+                <div style="margin-bottom:24px;">
+                    <label class="order-label" style="display:block; margin-bottom:6px; font-weight:700;">Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РїРѕР¶РµР»Р°РЅРёСЏ</label>
+                    <textarea id="ord-paid-notes" rows="3" placeholder="РћСЃРѕР±С‹Рµ С‚СЂРµР±РѕРІР°РЅРёСЏ, СЃСЂРѕРєРё, С‡С‚Рѕ РІР°Р¶РЅРѕ..."></textarea>
+                </div>
+                <div class="order-price-block" id="order-price-block" style="background:rgba(168,85,247,0.1); border-radius:16px; padding:20px; text-align:center; margin-bottom:24px;">
+                    <div class="order-price-label" style="font-size:12px; color:var(--text-dim); margin-bottom:8px;">РћСЂРёРµРЅС‚РёСЂРѕРІРѕС‡РЅР°СЏ СЃС‚РѕРёРјРѕСЃС‚СЊ</div>
+                    <div class="order-price-value" id="order-price-value" style="font-size:2rem; font-weight:900; color:var(--dub);">вЂ” в‚Ѕ</div>
+                    <div class="order-price-hint" style="font-size:11px; color:var(--text-dim); margin-top:8px;">РўРѕС‡РЅР°СЏ С†РµРЅР° РѕР±СЃСѓР¶РґР°РµС‚СЃСЏ РІ Telegram</div>
+                </div>
+                <button class="btn btn-purple" style="width:100%;" onclick="if(window.submitPaidOrder) submitPaidOrder()"><i class="fab fa-telegram-plane"></i> РџРµСЂРµР№С‚Рё РІ Telegram</button>
             </div>
         </div>
     </section>
@@ -348,224 +498,302 @@
 
 <!-- ==================== FOOTER ==================== -->
 <footer class="footer-main">
-    <div class="footer-inner">
+    <div class="footer-inner" style="max-width:1300px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:40px;">
         <div class="footer-brand">
-            <span class="logo">BLOOD<span> WASH</span> STUDIO</span>
-            <p>Студия фандаба, которая создаёт качественный дубляж и озвучку аниме, сериалов, фильмов и мультфильмов. Всё — с душой и для фанатов.</p>
-            <div class="footer-socials">
-                <a href="https://vk.com/bloodwashstudio" target="_blank"><i class="fab fa-vk"></i></a>
-                <a href="https://t.me/bloodwashstudio" target="_blank"><i class="fab fa-telegram-plane"></i></a>
-                <a href="https://www.youtube.com/@BloodWashStudio" target="_blank"><i class="fab fa-youtube"></i></a>
+            <span class="logo" style="font-size:1.3rem; font-weight:800;">BLOOD<span style="color:var(--blood);"> WASH</span> STUDIO</span>
+            <p style="font-size:13px; color:var(--text-dim); margin-top:16px; line-height:1.6;">РЎС‚СѓРґРёСЏ С„Р°РЅРґР°Р±Р°, РєРѕС‚РѕСЂР°СЏ СЃРѕР·РґР°С‘С‚ РєР°С‡РµСЃС‚РІРµРЅРЅС‹Р№ РґСѓР±Р»СЏР¶ Рё РѕР·РІСѓС‡РєСѓ Р°РЅРёРјРµ, СЃРµСЂРёР°Р»РѕРІ, С„РёР»СЊРјРѕРІ Рё РјСѓР»СЊС‚С„РёР»СЊРјРѕРІ. Р’СЃС‘ вЂ” СЃ РґСѓС€РѕР№ Рё РґР»СЏ С„Р°РЅР°С‚РѕРІ.</p>
+            <div class="footer-socials" style="display:flex; gap:12px; margin-top:20px;">
+                <a href="https://vk.com/bloodwashstudio" target="_blank" style="width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:center; transition:0.2s;"><i class="fab fa-vk"></i></a>
+                <a href="https://t.me/bloodwashstudio" target="_blank" style="width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:center; transition:0.2s;"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://www.youtube.com/@BloodWashStudio" target="_blank" style="width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:center; transition:0.2s;"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
         <div class="footer-col">
-            <h5>Сайт</h5>
-            <span onclick="navigate('home')">Релизы</span>
-            <span onclick="navigate('team')">Команда</span>
-            <span onclick="navigate('profile')">Профиль</span>
-            <span onclick="openPrivacy()">Политика конфиденциальности</span>
+            <h5 style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-bottom:20px; color:var(--text-dim);">РЎР°Р№С‚</h5>
+            <span onclick="if(window.navigate) navigate('home')" style="display:block; margin-bottom:12px; color:var(--text-dim); cursor:pointer; font-size:0.85rem;">Р РµР»РёР·С‹</span>
+            <span onclick="if(window.navigate) navigate('team')" style="display:block; margin-bottom:12px; color:var(--text-dim); cursor:pointer; font-size:0.85rem;">РљРѕРјР°РЅРґР°</span>
+            <span onclick="if(window.navigate) navigate('profile')" style="display:block; margin-bottom:12px; color:var(--text-dim); cursor:pointer; font-size:0.85rem;">РџСЂРѕС„РёР»СЊ</span>
+            <span onclick="if(window.openPrivacy) openPrivacy()" style="display:block; margin-bottom:12px; color:var(--text-dim); cursor:pointer; font-size:0.85rem;">РџРѕР»РёС‚РёРєР° РєРѕРЅС„РёРґРµРЅС†РёР°Р»СЊРЅРѕСЃС‚Рё</span>
         </div>
         <div class="footer-col">
-            <h5>Студия</h5>
-            <a href="https://vk.com/bloodwashstudio" target="_blank">ВКонтакте</a>
-            <a href="https://t.me/bloodwashstudio" target="_blank">Telegram</a>
-            <a href="https://www.youtube.com/@BloodWashStudio" target="_blank">YouTube</a>
-            <a href="/cdn-cgi/l/email-protection#">Написать нам</a>
+            <h5 style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-bottom:20px; color:var(--text-dim);">РЎС‚СѓРґРёСЏ</h5>
+            <a href="https://vk.com/bloodwashstudio" target="_blank" style="display:block; margin-bottom:12px; color:var(--text-dim); text-decoration:none; font-size:0.85rem;">Р’РљРѕРЅС‚Р°РєС‚Рµ</a>
+            <a href="https://t.me/bloodwashstudio" target="_blank" style="display:block; margin-bottom:12px; color:var(--text-dim); text-decoration:none; font-size:0.85rem;">Telegram</a>
+            <a href="https://www.youtube.com/@BloodWashStudio" target="_blank" style="display:block; margin-bottom:12px; color:var(--text-dim); text-decoration:none; font-size:0.85rem;">YouTube</a>
+            <a href="/cdn-cgi/l/email-protection#1e6d716b707a697c6b686f6e7b76706c686c5e79737f7772307d7173" style="display:block; margin-bottom:12px; color:var(--text-dim); text-decoration:none; font-size:0.85rem;">РќР°РїРёСЃР°С‚СЊ РЅР°Рј</a>
         </div>
         <div class="footer-col">
-            <h5>Хочешь с нами?</h5>
-            <p>Мы всегда рады новым актёрам дубляжа, редакторам и энтузиастам!</p>
-            <a href="https://forms.gle/YOUR_GOOGLE_FORM_ID" target="_blank" class="footer-join-btn"><i class="fas fa-microphone-alt"></i> Подать заявку</a>
+            <h5 style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-bottom:20px; color:var(--text-dim);">РҐРѕС‡РµС€СЊ СЃ РЅР°РјРё?</h5>
+            <p style="font-size:13px; color:var(--text-dim); margin-bottom:12px; line-height:1.6;">РњС‹ РІСЃРµРіРґР° СЂР°РґС‹ РЅРѕРІС‹Рј Р°РєС‚С‘СЂР°Рј РґСѓР±Р»СЏР¶Р°, СЂРµРґР°РєС‚РѕСЂР°Рј Рё СЌРЅС‚СѓР·РёР°СЃС‚Р°Рј!</p>
+            <a href="https://forms.gle/YOUR_GOOGLE_FORM_ID" target="_blank" style="display:inline-block; background:var(--blood); color:white; padding:10px 20px; border-radius:40px; text-decoration:none; font-size:13px; font-weight:700;"><i class="fas fa-microphone-alt"></i> РџРѕРґР°С‚СЊ Р·Р°СЏРІРєСѓ</a>
         </div>
     </div>
-    <div class="footer-bottom">
-        <p>© 2024–2026 Blood Wash Studio. Все права защищены.</p>
-        <a onclick="openPrivacy()">Политика конфиденциальности</a>
+    <div class="footer-bottom" style="text-align:center; padding-top:40px; margin-top:40px; border-top:1px solid var(--border); font-size:0.75rem; color:var(--text-dim);">
+        <p>В© 2024вЂ“2026 Blood Wash Studio. Р’СЃРµ РїСЂР°РІР° Р·Р°С‰РёС‰РµРЅС‹.</p>
+        <a onclick="if(window.openPrivacy) openPrivacy()" style="color:var(--text-dim); text-decoration:none; cursor:pointer;">РџРѕР»РёС‚РёРєР° РєРѕРЅС„РёРґРµРЅС†РёР°Р»СЊРЅРѕСЃС‚Рё</a>
     </div>
 </footer>
 
 <!-- ==================== MODALS ==================== -->
 
 <div id="m-rel" class="modal"><div class="modal-content">
-    <h3>Управление релизом</h3>
+    <h3 style="margin-bottom:18px; font-size:1.2rem; color:var(--blood);">РЈРїСЂР°РІР»РµРЅРёРµ СЂРµР»РёР·РѕРј</h3>
     <input type="hidden" id="ed-rel-id">
-    <input type="text" id="ad-title" placeholder="Название">
-    <select id="ad-genre"><option value="Аниме">Аниме</option><option value="Сериал">Сериал</option><option value="Фильм">Фильм</option><option value="Мультфильм">Мультфильм</option><option value="Трейлер">Трейлер</option><option value="Тизер">Тизер</option></select>
-    <input type="text" id="ad-year" placeholder="Год выпуска">
-    <input type="text" id="ad-voiceover" placeholder="Озвучка (Blood Wash Studio)">
-    <input type="text" id="ad-authors" placeholder="Студия / Авторы">
-    <input type="text" id="ad-img" placeholder="URL постера">
-    <textarea id="ad-desc" placeholder="Описание сюжета..." rows="4"></textarea>
-    <button class="btn btn-blue" onclick="saveRel()">Сохранить</button>
-    <button class="btn btn-outline" onclick="closeModals()">Отмена</button>
+    <input type="text" id="ad-title" placeholder="РќР°Р·РІР°РЅРёРµ">
+    <select id="ad-genre">
+        <option value="РђРЅРёРјРµ">РђРЅРёРјРµ</option><option value="РЎРµСЂРёР°Р»">РЎРµСЂРёР°Р»</option>
+        <option value="Р¤РёР»СЊРј">Р¤РёР»СЊРј</option><option value="РњСѓР»СЊС‚С„РёР»СЊРј">РњСѓР»СЊС‚С„РёР»СЊРј</option>
+        <option value="РўСЂРµР№Р»РµСЂ">РўСЂРµР№Р»РµСЂ</option><option value="РўРёР·РµСЂ">РўРёР·РµСЂ</option>
+    </select>
+    <input type="text" id="ad-year" placeholder="Р“РѕРґ РІС‹РїСѓСЃРєР°">
+    <input type="text" id="ad-voiceover" placeholder="РћР·РІСѓС‡РєР° (Blood Wash Studio)">
+    <input type="text" id="ad-authors" placeholder="РЎС‚СѓРґРёСЏ / РђРІС‚РѕСЂС‹">
+    <input type="text" id="ad-img" placeholder="URL РїРѕСЃС‚РµСЂР°">
+    <textarea id="ad-desc" placeholder="РћРїРёСЃР°РЅРёРµ СЃСЋР¶РµС‚Р°..." rows="4"></textarea>
+    <button class="btn btn-blue" style="width:100%; margin-top:5px;" onclick="if(window.saveRel) saveRel()">РЎРѕС…СЂР°РЅРёС‚СЊ</button>
+    <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">РћС‚РјРµРЅР°</button>
 </div></div>
 
-<div id="m-ep" class="modal"><div class="modal-content">
-    <h3 id="m-ep-heading">Добавить медиа</h3>
+<div id="m-ep" class="modal"><div class="modal-content" style="max-width:580px;">
+    <h3 id="m-ep-heading" style="margin-bottom:18px; font-size:1.2rem; color:var(--blood);">Р”РѕР±Р°РІРёС‚СЊ РјРµРґРёР°</h3>
     <input type="hidden" id="ed-ep-idx">
-    <select id="ad-ep-type"><option value="series">Серия / Фильм</option><option value="trailer">Трейлер (автоплей без звука)</option></select>
-    <input type="text" id="ad-ep-name" placeholder="Название кнопки (Серия 1 / Трейлер)">
-    <input type="text" id="ad-ep-title" placeholder="Полное название серии">
-    <input type="text" id="ad-ep-url" placeholder="URL видео (Google Drive или YouTube)">
-    <input type="text" id="ad-ep-thumb" placeholder="URL превью серии">
-    <button class="btn btn-blue" onclick="saveEp()">Сохранить</button>
-    <button class="btn btn-outline" onclick="closeModals()">Отмена</button>
+    <select id="ad-ep-type">
+        <option value="series">РЎРµСЂРёСЏ / Р¤РёР»СЊРј</option>
+        <option value="trailer">РўСЂРµР№Р»РµСЂ (Р°РІС‚РѕРїР»РµР№ Р±РµР· Р·РІСѓРєР°)</option>
+    </select>
+    <input type="text" id="ad-ep-name" placeholder="РќР°Р·РІР°РЅРёРµ РєРЅРѕРїРєРё (РЎРµСЂРёСЏ 1 / РўСЂРµР№Р»РµСЂ)">
+    <input type="text" id="ad-ep-title" placeholder="РџРѕР»РЅРѕРµ РЅР°Р·РІР°РЅРёРµ СЃРµСЂРёРё (РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅРѕ)">
+    <input type="text" id="ad-ep-url" placeholder="URL РІРёРґРµРѕ (Google Drive РёР»Рё YouTube)">
+    <input type="text" id="ad-ep-thumb" placeholder="URL РїСЂРµРІСЊСЋ СЃРµСЂРёРё">
+    <button class="btn btn-blue" style="width:100%; margin-top:5px;" onclick="if(window.saveEp) saveEp()">РЎРѕС…СЂР°РЅРёС‚СЊ</button>
+    <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">РћС‚РјРµРЅР°</button>
 </div></div>
 
 <div id="m-team" class="modal"><div class="modal-content">
-    <h3>Участник команды</h3>
+    <h3 style="margin-bottom:18px; font-size:1.2rem; color:var(--blood);">РЈС‡Р°СЃС‚РЅРёРє РєРѕРјР°РЅРґС‹</h3>
     <input type="hidden" id="ed-team-id">
-    <input type="text" id="ad-m-name" placeholder="Никнейм">
-    <input type="text" id="ad-m-role" placeholder="Роль (Дабер, Редактор...)">
-    <input type="text" id="ad-m-img" placeholder="URL фото">
-    <input type="text" id="ad-m-cat" placeholder="Категория">
-    <button class="btn btn-blue" onclick="saveTeam()">Сохранить</button>
-    <button class="btn btn-outline" onclick="closeModals()">Отмена</button>
+    <input type="text" id="ad-m-name" placeholder="РќРёРєРЅРµР№Рј">
+    <input type="text" id="ad-m-role" placeholder="Р РѕР»СЊ (Р”Р°Р±РµСЂ, Р РµРґР°РєС‚РѕСЂ...)">
+    <input type="text" id="ad-m-img" placeholder="URL С„РѕС‚Рѕ">
+    <input type="text" id="ad-m-cat" placeholder="РљР°С‚РµРіРѕСЂРёСЏ">
+    <button class="btn btn-blue" style="width:100%; margin-top:5px;" onclick="if(window.saveTeam) saveTeam()">РЎРѕС…СЂР°РЅРёС‚СЊ</button>
+    <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">РћС‚РјРµРЅР°</button>
 </div></div>
 
 <div id="m-prof" class="modal"><div class="modal-content">
-    <h3>Настройки аккаунта</h3>
-    <input type="text" id="ed-nick" placeholder="Никнейм">
-    <input type="text" id="ed-ava" placeholder="URL аватара">
-    <button class="btn" onclick="saveProfile()">Сохранить профиль</button>
-    <hr>
-    <input type="email" id="ed-new-email" placeholder="Новый Email">
-    <button class="btn btn-outline" onclick="changeUserEmail()">Сменить почту</button>
-    <input type="password" id="ed-new-pass" placeholder="Новый пароль">
-    <button class="btn btn-outline" onclick="changeUserPass()">Сменить пароль</button>
-    <button class="btn btn-outline" onclick="closeModals()">Закрыть</button>
+    <h3 style="margin-bottom:18px; font-size:1.2rem; color:var(--blood);">РќР°СЃС‚СЂРѕР№РєРё Р°РєРєР°СѓРЅС‚Р°</h3>
+    <input type="text" id="ed-nick" placeholder="РќРёРєРЅРµР№Рј">
+    <input type="text" id="ed-ava" placeholder="URL Р°РІР°С‚Р°СЂР°">
+    <button class="btn" style="width:100%; margin-bottom:14px;" onclick="if(window.saveProfile) saveProfile()">РЎРѕС…СЂР°РЅРёС‚СЊ РїСЂРѕС„РёР»СЊ</button>
+    <hr style="border-color:var(--border); margin-bottom:14px;">
+    <input type="email" id="ed-new-email" placeholder="РќРѕРІС‹Р№ Email">
+    <button class="btn btn-outline" style="width:100%; margin-bottom:10px;" onclick="if(window.changeUserEmail) changeUserEmail()">РЎРјРµРЅРёС‚СЊ РїРѕС‡С‚Сѓ</button>
+    <input type="password" id="ed-new-pass" placeholder="РќРѕРІС‹Р№ РїР°СЂРѕР»СЊ">
+    <button class="btn btn-outline" style="width:100%; margin-bottom:10px;" onclick="if(window.changeUserPass) changeUserPass()">РЎРјРµРЅРёС‚СЊ РїР°СЂРѕР»СЊ</button>
+    <button class="btn btn-outline" style="width:100%; margin-top:5px; border-color:red; color:red;" onclick="if(window.closeModals) closeModals()">Р—Р°РєСЂС‹С‚СЊ</button>
 </div></div>
 
 <div id="m-public-prof" class="modal"><div class="modal-content">
-    <h3>?? Мой публичный профиль</h3>
-    <p>Эту информацию смогут видеть другие пользователи.</p>
-    <label>О себе</label>
-    <textarea id="pub-bio" rows="5" placeholder="Расскажите о себе..."></textarea>
-    <label>Ссылка (соцсеть, портфолио)</label>
+    <h3 style="margin-bottom:6px; color:var(--dub);">рџЋ­ РњРѕР№ РїСѓР±Р»РёС‡РЅС‹Р№ РїСЂРѕС„РёР»СЊ</h3>
+    <p style="font-size:12px; color:var(--text-dim); margin-bottom:18px;">Р­С‚Сѓ РёРЅС„РѕСЂРјР°С†РёСЋ СЃРјРѕРіСѓС‚ РІРёРґРµС‚СЊ РґСЂСѓРіРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»Рё.</p>
+    <label style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Рћ СЃРµР±Рµ</label>
+    <textarea id="pub-bio" rows="5" placeholder="Р Р°СЃСЃРєР°Р¶РёС‚Рµ Рѕ СЃРµР±Рµ..."></textarea>
+    <label style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">РЎСЃС‹Р»РєР° (СЃРѕС†СЃРµС‚СЊ, РїРѕСЂС‚С„РѕР»РёРѕ)</label>
     <input type="text" id="pub-link" placeholder="https://...">
-    <button class="btn btn-purple" onclick="savePublicProfile()">Сохранить</button>
-    <button class="btn btn-outline" onclick="closeModals()">Отмена</button>
+    <button class="btn btn-purple" style="width:100%;" onclick="if(window.savePublicProfile) savePublicProfile()">РЎРѕС…СЂР°РЅРёС‚СЊ</button>
+    <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">РћС‚РјРµРЅР°</button>
 </div></div>
 
 <div id="m-subs" class="modal"><div class="modal-content">
-    <h3>Ваши подписчики</h3>
-    <div id="subs-list"></div>
-    <button class="btn btn-outline" onclick="closeModals()">Закрыть</button>
+    <h3 style="margin-bottom:15px;">Р’Р°С€Рё РїРѕРґРїРёСЃС‡РёРєРё</h3>
+    <div id="subs-list" style="max-height:300px; overflow-y:auto;"></div>
+    <button class="btn btn-outline" style="width:100%; margin-top:15px;" onclick="if(window.closeModals) closeModals()">Р—Р°РєСЂС‹С‚СЊ</button>
 </div></div>
 
 <div id="m-tp-edit" class="modal"><div class="modal-content">
-    <h3>Редактировать страницу участника</h3>
-    <textarea id="tp-bio" rows="8" placeholder="Информация об участнике..."></textarea>
-    <input type="text" id="tp-social" placeholder="Ссылка на соцсети">
-    <button class="btn btn-blue" onclick="saveTP()">Сохранить</button>
-    <button class="btn btn-outline" onclick="closeModals()">Отмена</button>
+    <h3 style="margin-bottom:15px;">Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ СЃС‚СЂР°РЅРёС†Сѓ СѓС‡Р°СЃС‚РЅРёРєР°</h3>
+    <textarea id="tp-bio" rows="8" placeholder="РРЅС„РѕСЂРјР°С†РёСЏ РѕР± СѓС‡Р°СЃС‚РЅРёРєРµ..."></textarea>
+    <input type="text" id="tp-social" placeholder="РЎСЃС‹Р»РєР° РЅР° СЃРѕС†СЃРµС‚Рё">
+    <button class="btn btn-blue" style="width:100%;" onclick="if(window.saveTP) saveTP()">РЎРѕС…СЂР°РЅРёС‚СЊ</button>
+    <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">РћС‚РјРµРЅР°</button>
 </div></div>
 
 <div id="m-my-tp-edit" class="modal"><div class="modal-content">
-    <h3>?? Редактировать мою страницу</h3>
-    <div id="my-tp-name-block"><label>Имя / Псевдоним</label><input type="text" id="my-tp-name" placeholder="Ваш псевдоним"></div>
-    <div id="my-tp-img-block"><label>URL Аватара</label><input type="text" id="my-tp-img" placeholder="Ссылка на фото"></div>
-    <label>О себе</label><textarea id="my-tp-bio" rows="7" placeholder="Расскажите о себе..."></textarea>
-    <label>Соцсети / Ссылки</label><input type="text" id="my-tp-social" placeholder="https://...">
-    <button class="btn btn-purple" onclick="saveMyTP()">Сохранить</button>
-    <button class="btn btn-outline" onclick="closeModals()">Отмена</button>
+    <h3 style="margin-bottom:15px; color:var(--dub);">вњЏпёЏ Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ РјРѕСЋ СЃС‚СЂР°РЅРёС†Сѓ</h3>
+    <div id="my-tp-name-block" style="display:none;">
+        <label style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">РРјСЏ / РџСЃРµРІРґРѕРЅРёРј</label>
+        <input type="text" id="my-tp-name" placeholder="Р’Р°С€ РїСЃРµРІРґРѕРЅРёРј">
+    </div>
+    <div id="my-tp-img-block" style="display:none;">
+        <label style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">URL РђРІР°С‚Р°СЂР°</label>
+        <input type="text" id="my-tp-img" placeholder="РЎСЃС‹Р»РєР° РЅР° С„РѕС‚Рѕ">
+    </div>
+    <label style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Рћ СЃРµР±Рµ</label>
+    <textarea id="my-tp-bio" rows="7" placeholder="Р Р°СЃСЃРєР°Р¶РёС‚Рµ Рѕ СЃРµР±Рµ..."></textarea>
+    <label style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">РЎРѕС†СЃРµС‚Рё / РЎСЃС‹Р»РєРё</label>
+    <input type="text" id="my-tp-social" placeholder="https://...">
+    <button class="btn btn-purple" style="width:100%;" onclick="if(window.saveMyTP) saveMyTP()">РЎРѕС…СЂР°РЅРёС‚СЊ</button>
+    <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">РћС‚РјРµРЅР°</button>
 </div></div>
 
 <div id="m-access" class="modal"><div class="modal-content">
-    <h3><i class="fas fa-key"></i> Выдать доступ к карточке</h3>
+    <h3 style="margin-bottom:6px; color:var(--dub);"><i class="fas fa-key"></i> Р’С‹РґР°С‚СЊ РґРѕСЃС‚СѓРї Рє РєР°СЂС‚РѕС‡РєРµ</h3>
     <input type="email" id="access-email" placeholder="user@example.com">
-    <p>Разрешить редактировать:</p>
-    <label><input type="checkbox" id="acc-name"> Имя / Псевдоним</label>
-    <label><input type="checkbox" id="acc-img"> Аватар / Фото</label>
-    <button class="btn btn-purple" onclick="grantCardAccess()"><i class="fas fa-check"></i> Выдать доступ</button>
-    <button class="btn btn-outline" onclick="closeModals()">Отмена</button>
+    <p style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; margin:12px 0 8px;">Р Р°Р·СЂРµС€РёС‚СЊ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ:</p>
+    <label class="checkbox-row" style="display:flex; align-items:center; gap:8px; margin-bottom:8px;"><input type="checkbox" id="acc-name"> РРјСЏ / РџСЃРµРІРґРѕРЅРёРј</label>
+    <label class="checkbox-row" style="display:flex; align-items:center; gap:8px; margin-bottom:8px;"><input type="checkbox" id="acc-img"> РђРІР°С‚Р°СЂ / Р¤РѕС‚Рѕ</label>
+    <button class="btn btn-purple" style="width:100%; margin-top:10px;" onclick="if(window.grantCardAccess) grantCardAccess()"><i class="fas fa-check"></i> Р’С‹РґР°С‚СЊ РґРѕСЃС‚СѓРї</button>
+    <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">РћС‚РјРµРЅР°</button>
 </div></div>
 
-<div id="m-role" class="modal"><div class="modal-content">
-    <h3><i class="fas fa-user-shield"></i> Управление ролями</h3>
-    <p>Роль <b>dub</b> — открывает DUB-in.<br>Роль <b>moderator</b> — может отправлять жалобы.</p>
-    <label>Email пользователя</label><input type="email" id="role-email" placeholder="user@example.com">
-    <label>Назначить роль</label><select id="role-select"><option value="moderator">moderator — Модератор</option><option value="dub">dub — Актёр дубляжа</option><option value="admin">admin — Администратор</option></select>
-    <button class="btn btn-blue" onclick="assignRole()"><i class="fas fa-save"></i> Назначить роль</button>
-    <hr>
-    <p>Снять роль (вернуть в обычные пользователи):</p>
-    <button class="btn btn-outline" onclick="removeRole()"><i class="fas fa-user-minus"></i> Снять текущую роль</button>
-    <button class="btn btn-outline" onclick="closeModals()">Закрыть</button>
+<div id="m-role" class="modal"><div class="modal-content" style="max-width:500px;">
+    <h3 style="margin-bottom:6px; color:var(--admin);"><i class="fas fa-user-shield"></i> РЈРїСЂР°РІР»РµРЅРёРµ СЂРѕР»СЏРјРё</h3>
+    <p style="font-size:12px; color:var(--text-dim); margin-bottom:18px;">
+        Р РѕР»СЊ <b style="color:var(--dub);">dub</b> вЂ” РѕС‚РєСЂС‹РІР°РµС‚ DUB-in.<br>
+        Р РѕР»СЊ <b style="color:#22c55e;">moderator</b> вЂ” РјРѕР¶РµС‚ РѕС‚РїСЂР°РІР»СЏС‚СЊ Р¶Р°Р»РѕР±С‹.
+    </p>
+    <label style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">Email РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</label>
+    <input type="email" id="role-email" placeholder="user@example.com">
+    <label style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; margin-bottom:6px; display:block;">РќР°Р·РЅР°С‡РёС‚СЊ СЂРѕР»СЊ</label>
+    <select id="role-select" style="margin-bottom:16px;">
+        <option value="moderator">moderator вЂ” РњРѕРґРµСЂР°С‚РѕСЂ</option>
+        <option value="dub">dub вЂ” РђРєС‚С‘СЂ РґСѓР±Р»СЏР¶Р°</option>
+        <option value="admin">admin вЂ” РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ</option>
+    </select>
+    <button class="btn btn-blue" style="width:100%;" onclick="if(window.assignRole) assignRole()"><i class="fas fa-save"></i> РќР°Р·РЅР°С‡РёС‚СЊ СЂРѕР»СЊ</button>
+    <hr style="border-color:var(--border); margin:14px 0;">
+    <p style="font-size:12px; color:var(--text-dim); margin-bottom:10px;">РЎРЅСЏС‚СЊ СЂРѕР»СЊ (РІРµСЂРЅСѓС‚СЊ РІ РѕР±С‹С‡РЅС‹Рµ РїРѕР»СЊР·РѕРІР°С‚РµР»Рё):</p>
+    <button class="btn btn-outline" style="width:100%; border-color:#ef4444; color:#ef4444;" onclick="if(window.removeRole) removeRole()"><i class="fas fa-user-minus"></i> РЎРЅСЏС‚СЊ С‚РµРєСѓС‰СѓСЋ СЂРѕР»СЊ</button>
+    <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">Р—Р°РєСЂС‹С‚СЊ</button>
 </div></div>
 
 <div id="m-give-ach" class="modal"><div class="modal-content">
-    <h3>Выдать достижение</h3>
-    <input type="text" id="ga-uid" placeholder="Email пользователя">
-    <input type="text" id="ga-name" placeholder="Название достижения">
-    <input type="text" id="ga-desc" placeholder="Описание">
-    <input type="text" id="ga-img" placeholder="Эмодзи (например: ??)">
-    <button class="btn btn-blue" onclick="giveAch()">Выдать</button>
-    <button class="btn btn-outline" onclick="closeModals()">Закрыть</button>
+    <h3 style="margin-bottom:15px;">Р’С‹РґР°С‚СЊ РґРѕСЃС‚РёР¶РµРЅРёРµ</h3>
+    <input type="text" id="ga-uid" placeholder="Email РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ">
+    <input type="text" id="ga-name" placeholder="РќР°Р·РІР°РЅРёРµ РґРѕСЃС‚РёР¶РµРЅРёСЏ">
+    <input type="text" id="ga-desc" placeholder="РћРїРёСЃР°РЅРёРµ">
+    <input type="text" id="ga-img" placeholder="Р­РјРѕРґР·Рё (РЅР°РїСЂРёРјРµСЂ: рџЏ†)">
+    <button class="btn btn-blue" style="width:100%;" onclick="if(window.giveAch) giveAch()">Р’С‹РґР°С‚СЊ</button>
+    <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">Р—Р°РєСЂС‹С‚СЊ</button>
 </div></div>
 
 <div id="m-ach-inv" class="modal"><div class="modal-content">
-    <h3>Инвентарь достижений</h3>
-    <p>Нажмите, чтобы скрыть/показать в профиле.</p>
-    <div id="ach-inv-list"></div>
-    <button class="btn btn-outline" onclick="closeModals()">Закрыть</button>
+    <h3 style="margin-bottom:5px;">РРЅРІРµРЅС‚Р°СЂСЊ РґРѕСЃС‚РёР¶РµРЅРёР№</h3>
+    <p style="font-size:11px; color:var(--text-dim); margin-bottom:15px;">РќР°Р¶РјРёС‚Рµ, С‡С‚РѕР±С‹ СЃРєСЂС‹С‚СЊ/РїРѕРєР°Р·Р°С‚СЊ РІ РїСЂРѕС„РёР»Рµ.</p>
+    <div id="ach-inv-list" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;"></div>
+    <button class="btn btn-outline" style="width:100%; margin-top:15px;" onclick="if(window.closeModals) closeModals()">Р—Р°РєСЂС‹С‚СЊ</button>
 </div></div>
 
-<div id="m-ach-view" class="modal"><div class="modal-content">
-    <div id="ach-v-img" style="font-size:50px;"></div>
-    <h2 id="ach-v-name"></h2>
-    <p id="ach-v-desc"></p>
-    <div id="ach-v-meta"></div>
-    <button id="btn-ach-del" class="btn" style="background:red;display:none;" onclick="deleteAchievement()">Удалить навсегда</button>
-    <button class="btn btn-outline" onclick="closeModals()">Закрыть</button>
+<div id="m-ach-view" class="modal"><div class="modal-content" style="text-align:center;">
+    <div id="ach-v-img" style="font-size:50px; margin-bottom:10px;"></div>
+    <h2 id="ach-v-name" style="margin-bottom:10px;"></h2>
+    <p id="ach-v-desc" style="font-size:14px; margin-bottom:15px; line-height:1.5; color:var(--text-dim);"></p>
+    <div id="ach-v-meta" style="font-size:12px; color:var(--text-dim); background:var(--input-bg); padding:10px; border-radius:8px; margin-bottom:14px; border:1px solid var(--border);"></div>
+    <button id="btn-ach-del" class="btn" style="background:red; width:100%; display:none; margin-bottom:8px;" onclick="if(window.deleteAchievement) deleteAchievement()">РЈРґР°Р»РёС‚СЊ РЅР°РІСЃРµРіРґР°</button>
+    <button class="btn btn-outline" style="width:100%;" onclick="if(window.closeModals) closeModals()">Р—Р°РєСЂС‹С‚СЊ</button>
 </div></div>
 
-<div id="m-privacy" class="modal"><div class="modal-content">
-    <h3>Политика конфиденциальности</h3>
-    <div id="priv-text"></div>
-    <textarea id="priv-edit" style="display:none;"></textarea>
-    <div id="priv-adm-btns" style="display:none;">
-        <button id="priv-btn-edit" class="btn btn-blue" onclick="editPriv()">Редактировать</button>
-        <button id="priv-btn-save" class="btn btn-blue" style="display:none;" onclick="savePriv()">Сохранить</button>
+<div id="m-privacy" class="modal"><div class="modal-content" style="max-width:700px;">
+    <h3 style="margin-bottom:15px;">РџРѕР»РёС‚РёРєР° РєРѕРЅС„РёРґРµРЅС†РёР°Р»СЊРЅРѕСЃС‚Рё</h3>
+    <div id="priv-text" style="font-size:13px; line-height:1.6; margin:15px 0; max-height:400px; overflow-y:auto; white-space:pre-wrap; color:var(--text-dim);"></div>
+    <textarea id="priv-edit" style="display:none; height:280px; width:100%;"></textarea>
+    <div id="priv-adm-btns" style="display:none; margin-top:10px;">
+        <button id="priv-btn-edit" class="btn btn-blue" style="width:100%;" onclick="if(window.editPriv) editPriv()">Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ</button>
+        <button id="priv-btn-save" class="btn btn-blue" style="display:none; width:100%; background:green;" onclick="if(window.savePriv) savePriv()">РЎРѕС…СЂР°РЅРёС‚СЊ</button>
     </div>
-    <button class="btn btn-outline" onclick="closeModals()">Закрыть</button>
+    <button class="btn btn-outline" style="width:100%; margin-top:10px;" onclick="if(window.closeModals) closeModals()">Р—Р°РєСЂС‹С‚СЊ</button>
 </div></div>
 
-<div id="m-user-profile" class="modal"><div class="modal-content">
-    <img id="mu-ava" style="width:85px;height:85px;border-radius:50%;">
-    <h2 id="mu-nick"></h2>
-    <div id="mu-role-badge"></div>
-    <p id="mu-bio"></p>
-    <a id="mu-link" href="#" target="_blank">Профиль</a>
-    <div><div><b id="mu-views-count">0</b><br>Просмотрено</div><div><b id="mu-subs-count">0</b><br>Подписчики</div></div>
-    <div id="mu-ach-list"></div>
-    <button id="btn-mu-sub" class="btn">Подписаться</button>
-    <button id="btn-report-user" class="btn btn-outline" style="display:none;">Пожаловаться</button>
-    <button class="btn btn-outline" onclick="closeModals()">Закрыть</button>
+<div id="m-user-profile" class="modal"><div class="modal-content" style="text-align:center;">
+    <img id="mu-ava" style="width:85px; height:85px; border-radius:50%; object-fit:cover; border:2px solid var(--blood); margin-bottom:10px;">
+    <h2 id="mu-nick" style="margin-bottom:8px;"></h2>
+    <div id="mu-role-badge" style="margin-bottom:12px; display:flex; justify-content:center;"></div>
+    <p id="mu-bio" class="mu-bio-text" style="margin-bottom:12px;"></p>
+    <a id="mu-link" href="#" target="_blank" class="btn btn-outline btn-sm" style="text-decoration:none; display:none; margin:0 auto 12px;"><i class="fas fa-link"></i> РџСЂРѕС„РёР»СЊ</a>
+    <div style="display:flex; justify-content:center; gap:30px; font-size:13px; margin:12px 0;">
+        <div><b id="mu-views-count" style="font-size:1.2rem;">0</b><br><span style="color:var(--text-dim); font-size:11px;">РџСЂРѕСЃРјРѕС‚СЂРµРЅРѕ</span></div>
+        <div><b id="mu-subs-count" style="font-size:1.2rem;">0</b><br><span style="color:var(--text-dim); font-size:11px;">РџРѕРґРїРёСЃС‡РёРєРё</span></div>
+    </div>
+    <div id="mu-ach-list" style="display:flex; justify-content:center; gap:6px; margin:12px 0; flex-wrap:wrap;"></div>
+    <button id="btn-mu-sub" class="btn" style="width:100%; margin-bottom:8px;">РџРѕРґРїРёСЃР°С‚СЊСЃСЏ</button>
+    <button id="btn-report-user" class="btn btn-outline" style="width:100%; margin-bottom:8px; border-color:#f59e0b; color:#f59e0b; display:none;">
+        <i class="fas fa-flag"></i> РџРѕР¶Р°Р»РѕРІР°С‚СЊСЃСЏ
+    </button>
+    <button class="btn btn-outline" style="width:100%;" onclick="if(window.closeModals) closeModals()">Р—Р°РєСЂС‹С‚СЊ</button>
 </div></div>
 
-<div id="m-dubin-project" class="modal"><div class="modal-content">
-    <h3>?? Управление проектом DUB-in</h3>
+<div id="m-dubin-project" class="modal"><div class="modal-content" style="max-width:600px;">
+    <h3 style="margin-bottom:6px; color:var(--dub);">рџ“Ѓ РЈРїСЂР°РІР»РµРЅРёРµ РїСЂРѕРµРєС‚РѕРј DUB-in</h3>
     <input type="hidden" id="dubin-proj-id">
-    <input type="text" id="dp-name" placeholder="Название проекта *">
-    <select id="dp-genre"><option value="Аниме">Аниме</option><option value="Сериал">Сериал</option><option value="Фильм">Фильм</option><option value="Мультфильм">Мультфильм</option><option value="Трейлер">Трейлер</option><option value="Тизер">Тизер</option></select>
-    <select id="dp-status"><option value="В работе">В работе</option><option value="Завершён">Завершён</option><option value="На паузе">На паузе</option></select>
-    <div><p>?? Ссылки на папки Google Drive</p><input type="text" id="dp-raw" placeholder="?? RAW-ка"><input type="text" id="dp-hard" placeholder="?? Hardsubs"><input type="text" id="dp-soft" placeholder="?? Softsubs"><input type="text" id="dp-voice" placeholder="?? Озвучка"></div>
-    <input type="text" id="dp-img" placeholder="Обложка (URL)">
-    <textarea id="dp-notes" rows="3" placeholder="Заметки для команды..."></textarea>
-    <button class="btn btn-purple" onclick="saveDubinProject()">Сохранить проект</button>
-    <button class="btn btn-outline" onclick="closeModals()">Отмена</button>
+    <input type="text" id="dp-name" placeholder="РќР°Р·РІР°РЅРёРµ РїСЂРѕРµРєС‚Р° *">
+    <select id="dp-genre" style="margin-bottom:12px;">
+        <option value="РђРЅРёРјРµ">РђРЅРёРјРµ</option><option value="РЎРµСЂРёР°Р»">РЎРµСЂРёР°Р»</option>
+        <option value="Р¤РёР»СЊРј">Р¤РёР»СЊРј</option><option value="РњСѓР»СЊС‚С„РёР»СЊРј">РњСѓР»СЊС‚С„РёР»СЊРј</option>
+        <option value="РўСЂРµР№Р»РµСЂ">РўСЂРµР№Р»РµСЂ</option><option value="РўРёР·РµСЂ">РўРёР·РµСЂ</option>
+    </select>
+    <select id="dp-status" style="margin-bottom:12px;">
+        <option value="Р’ СЂР°Р±РѕС‚Рµ">Р’ СЂР°Р±РѕС‚Рµ</option>
+        <option value="Р—Р°РІРµСЂС€С‘РЅ">Р—Р°РІРµСЂС€С‘РЅ</option>
+        <option value="РќР° РїР°СѓР·Рµ">РќР° РїР°СѓР·Рµ</option>
+    </select>
+    <div style="background:rgba(168,85,247,0.06); border:1px solid rgba(168,85,247,0.2); border-radius:12px; padding:16px; margin-bottom:14px;">
+        <p style="font-size:11px; color:var(--dub); font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">рџ”— РЎСЃС‹Р»РєРё РЅР° РїР°РїРєРё Google Drive</p>
+        <input type="text" id="dp-raw" placeholder="рџ“№ RAW-РєР°" style="margin-bottom:8px;">
+        <input type="text" id="dp-hard" placeholder="рџ“ќ Hardsubs" style="margin-bottom:8px;">
+        <input type="text" id="dp-soft" placeholder="рџ—’ Softsubs" style="margin-bottom:8px;">
+        <input type="text" id="dp-voice" placeholder="рџЋ™ РћР·РІСѓС‡РєР°">
+    </div>
+    <input type="text" id="dp-img" placeholder="РћР±Р»РѕР¶РєР° (URL)">
+    <div id="dp-img-preview" style="display:none; margin:-4px 0 12px; border-radius:10px; overflow:hidden; border:1px solid var(--border); width:72px; height:100px;">
+        <img id="dp-img-preview-img" style="width:100%; height:100%; object-fit:cover;" src="" alt="">
+    </div>
+    <textarea id="dp-notes" rows="3" placeholder="Р—Р°РјРµС‚РєРё РґР»СЏ РєРѕРјР°РЅРґС‹..."></textarea>
+    <button class="btn btn-purple" style="width:100%;" onclick="if(window.saveDubinProject) saveDubinProject()"><i class="fas fa-save"></i> РЎРѕС…СЂР°РЅРёС‚СЊ РїСЂРѕРµРєС‚</button>
+    <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">РћС‚РјРµРЅР°</button>
 </div></div>
 
 <div id="m-upload-voice" class="modal"><div class="modal-content">
-    <h3><i class="fas fa-upload"></i> Загрузить озвучку</h3>
+    <h3 style="margin-bottom:6px; color:var(--dub);"><i class="fas fa-upload"></i> Р—Р°РіСЂСѓР·РёС‚СЊ РѕР·РІСѓС‡РєСѓ</h3>
     <input type="hidden" id="uv-proj-id">
-    <input type="text" id="uv-name" placeholder="Название файла">
-    <input type="text" id="uv-link" placeholder="Прямая ссылка на файл *">
-    <select id="uv-format"><option value="mp3">MP3</option><option value="flac">FLAC</option></select>
-    <input type="text" id="uv-comment" placeholder="Комментарий">
-    <button class="btn btn-purple" onclick="submitVoiceFile()">Отправить</button>
-    <button class="btn btn-outline" onclick="closeModals()">Отмена</button>
+    <input type="text" id="uv-name" placeholder="РќР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р°">
+    <input type="text" id="uv-link" placeholder="РџСЂСЏРјР°СЏ СЃСЃС‹Р»РєР° РЅР° С„Р°Р№Р» *">
+    <select id="uv-format" style="margin-bottom:12px;">
+        <option value="mp3">MP3</option>
+        <option value="flac">FLAC</option>
+    </select>
+    <input type="text" id="uv-comment" placeholder="РљРѕРјРјРµРЅС‚Р°СЂРёР№ (РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅРѕ)">
+    <button class="btn btn-purple" style="width:100%;" onclick="if(window.submitVoiceFile) submitVoiceFile()"><i class="fas fa-upload"></i> РћС‚РїСЂР°РІРёС‚СЊ</button>
+    <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">РћС‚РјРµРЅР°</button>
 </div></div>
+
+<script>
+    // ===== FALLBACK NAVIGATION (СЂР°Р±РѕС‚Р°РµС‚ РґРѕ Р·Р°РіСЂСѓР·РєРё РѕСЃРЅРѕРІРЅРѕРіРѕ СЃРєСЂРёРїС‚Р°) =====
+    (function() {
+        if (!window.navigate) {
+            window.navigate = function(page) {
+                console.log('Navigate to:', page);
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                const target = document.getElementById(page);
+                if (target) target.classList.add('active');
+                const navMap = { home:'n-home', team:'n-team', profile:'n-profile', dubin:'n-dubin', order:'n-order', view:'n-home' };
+                const activeId = navMap[page];
+                if (activeId) {
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    const activeLink = document.getElementById(activeId);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+                if (page !== 'view') history.pushState(null, '', '#' + page);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+        }
+        
+        // РћР±СЂР°Р±РѕС‚РєР° С…РµС€Р° РїСЂРё Р·Р°РіСЂСѓР·РєРµ
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '') || 'home';
+            if (window.navigate) window.navigate(hash);
+        });
+    })();
+</script>
 
 <script type="module" src="js/app.js"></script>
 
