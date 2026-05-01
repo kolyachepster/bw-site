@@ -42,3 +42,28 @@
 ---
 
 © 2024–2026 Sound Wave Studio
+# 🩸 Blood Wash Studio — Сайт студии дубляжа
+
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Firebase](https://img.shields.io/badge/Firebase-10.8.1-orange)](https://firebase.google.com/)
+[![EmailJS](https://img.shields.io/badge/EmailJS-4.x-blue)](https://www.emailjs.com/)
+
+Современный веб-сайт для студии фандаба **Blood Wash Studio** с полным функционалом: релизы, команда, DUB-in платформа, заказ озвучки, система достижений и многое другое.
+
+## ✨ Возможности
+
+- 🎬 **Релизы** — просмотр, лайки, комментарии, списки
+- 👥 **Команда** — страницы участников с правами доступа
+- 🎙️ **DUB-in** — закрытый раздел для команды с файлами проектов
+- 💰 **Заказ озвучки** — бесплатные предложения и платные заказы через Telegram
+- 🏆 **Достижения** — автоматические и ручные (для админов)
+- 🔐 **Авторизация** — через Firebase Auth с ролями (user/dub/moderator/admin)
+- 📱 **Адаптивный дизайн** — работает на всех устройствах
+- 🎥 **Встроенный плеер** — поддержка YouTube и Google Drive
+
+## 🚀 Быстрый старт
+
+### 1. Клонирование
+```bash
+git clone https://github.com/YOUR_USERNAME/blood-wash-studio.git
+cd blood-wash-studio

@@ -1,6 +1,6 @@
-// config/config.js
+// config/config.js - РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ Blood Wash Studio
 
-// ===== FIREBASE КОНФИГУРАЦИЯ =====
+// ===== FIREBASE CONFIGURATION =====
 export const FIREBASE_CONFIG = {
     apiKey: "AIzaSyDRC7nVdYsnRQqKCkNd3TipjNsTLPmJkPQ",
     authDomain: "bw-site-6aeee.firebaseapp.com",
@@ -12,40 +12,40 @@ export const FIREBASE_CONFIG = {
     measurementId: "G-HSWDG87NHQ"
 };
 
-// ===== EMAILJS КОНФИГУРАЦИЯ =====
+// ===== EMAILJS CONFIGURATION =====
 export const EMAILJS_CONFIG = {
     serviceId: 'service_8497uil',
     templateSuggest: 'template_suggest',
     publicKey: 'Xkprm41y-mI62g1_B'
 };
 
-// ===== СОЦИАЛЬНЫЕ ССЫЛКИ =====
+// ===== SOCIAL LINKS =====
 export const SOCIAL_LINKS = {
     vk: 'https://vk.com/bloodwashstudio',
     telegram: 'https://t.me/bloodwashstudio',
     youtube: 'https://www.youtube.com/@BloodWashStudio'
 };
 
-// ===== ССЫЛКА НА ФОРМУ =====
-export const JOIN_FORM_URL = 'https://forms.gle/YOUR_GOOGLE_FORM_ID';
+// ===== JOIN FORM URL =====
+export const JOIN_FORM_URL = 'https://forms.gle/fRv36rP1RXn6sN3dA';
 
-// ===== ПЛЕЙСХОЛДЕРЫ =====
+// ===== PLACEHOLDERS =====
 export const PLACEHOLDER_IMG = 'https://via.placeholder.com/300x400/141417/8b0000?text=BWS';
 export const PLACEHOLDER_TEAM_IMG = 'https://api.dicebear.com/7.x/identicon/svg';
 
-// ===== НАСТРОЙКИ =====
-export const VIEW_COUNT_AFTER_MS = 600000; // 10 минут
+// ===== SETTINGS =====
+export const VIEW_COUNT_AFTER_MS = 600000; // 10 РјРёРЅСѓС‚
 
-// ===== АВТОМАТИЧЕСКИЕ ДОСТИЖЕНИЯ =====
+// ===== AUTO ACHIEVEMENTS =====
 export const AUTO_ACHIEVEMENTS = [
-    { id: 'first_view', name: 'Первый просмотр', desc: 'Посмотрел первый релиз', img: '???', trigger: 'views_1' },
-    { id: 'views_10', name: 'Киноман', desc: '10 просмотренных релизов', img: '??', trigger: 'views_10' },
-    { id: 'views_50', name: 'Синефил', desc: '50 просмотренных релизов', img: '??', trigger: 'views_50' },
-    { id: 'first_comment', name: 'Голос', desc: 'Оставил первый комментарий', img: '??', trigger: 'comment_1' },
-    { id: 'first_like', name: 'Меценат', desc: 'Поставил первый лайк', img: '??', trigger: 'like_1' },
-    { id: 'first_favorite', name: 'Коллекционер', desc: 'Добавил релиз в избранное', img: '?', trigger: 'favorite_1' },
-    { id: 'subs_1', name: 'Популярный', desc: 'Получил первого подписчика', img: '??', trigger: 'subs_1' },
-    { id: 'suggest_1', name: 'Инициатор', desc: 'Предложил проект для озвучки', img: '??', trigger: 'suggest_1' },
-    { id: 'profile_filled', name: 'Личность', desc: 'Заполнил профиль полностью', img: '??', trigger: 'profile_ok' },
-    { id: 'newcomer', name: 'Новичок', desc: 'Зарегистрировался на сайте', img: '??', trigger: null }
+    { id: 'first_view', name: 'РџРµСЂРІС‹Р№ РїСЂРѕСЃРјРѕС‚СЂ', desc: 'РџСЂРѕСЃРјРѕС‚СЂРµР»Рё РїРµСЂРІС‹Р№ СЂРµР»РёР·', img: 'рџ‘ЃпёЏ', trigger: 'views_1' },
+    { id: 'views_10', name: 'Р—СЂРёС‚РµР»СЊ', desc: '10 РїСЂРѕСЃРјРѕС‚СЂРµРЅРЅС‹С… СЂРµР»РёР·РѕРІ', img: 'рџ“є', trigger: 'views_10' },
+    { id: 'views_50', name: 'РљРёРЅРѕРјР°РЅ', desc: '50 РїСЂРѕСЃРјРѕС‚СЂРµРЅРЅС‹С… СЂРµР»РёР·РѕРІ', img: 'рџЋ¬', trigger: 'views_50' },
+    { id: 'first_comment', name: 'РљСЂРёС‚РёРє', desc: 'РћСЃС‚Р°РІРёР»Рё РїРµСЂРІС‹Р№ РєРѕРјРјРµРЅС‚Р°СЂРёР№', img: 'рџ’¬', trigger: 'comment_1' },
+    { id: 'first_like', name: 'Р¦РµРЅРёС‚РµР»СЊ', desc: 'РџРѕСЃС‚Р°РІРёР»Рё РїРµСЂРІСѓСЋ РѕС†РµРЅРєСѓ', img: 'рџ‘Ќ', trigger: 'like_1' },
+    { id: 'first_favorite', name: 'РљРѕР»Р»РµРєС†РёРѕРЅРµСЂ', desc: 'Р”РѕР±Р°РІРёР»Рё СЂРµР»РёР· РІ РёР·Р±СЂР°РЅРЅРѕРµ', img: 'в­ђ', trigger: 'favorite_1' },
+    { id: 'subs_1', name: 'РџРѕРїСѓР»СЏСЂРЅРѕСЃС‚СЊ', desc: 'РџРѕР»СѓС‡РёР»Рё РїРµСЂРІРѕРіРѕ РїРѕРґРїРёСЃС‡РёРєР°', img: 'рџ‘Ґ', trigger: 'subs_1' },
+    { id: 'suggest_1', name: 'РРґРµР№РЅС‹Р№', desc: 'РџСЂРµРґР»РѕР¶РёР»Рё РїСЂРѕРµРєС‚ РґР»СЏ РѕР·РІСѓС‡РєРё', img: 'рџ’Ў', trigger: 'suggest_1' },
+    { id: 'profile_filled', name: 'Р›РёС‡РЅРѕСЃС‚СЊ', desc: 'Р—Р°РїРѕР»РЅРёР»Рё РїСѓР±Р»РёС‡РЅС‹Р№ РїСЂРѕС„РёР»СЊ', img: 'рџ“ќ', trigger: 'profile_ok' },
+    { id: 'newcomer', name: 'РќРѕРІРёС‡РѕРє', desc: 'Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°Р»РёСЃСЊ РЅР° СЃР°Р№С‚Рµ', img: 'рџ‘‹', trigger: null }
 ];

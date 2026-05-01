@@ -13,7 +13,7 @@ import { checkAndAwardAch } from './achievements.js';
 import { EMAILJS_CONFIG } from '../config/config.js';
 
 // ── Telegram Bot username (замените на свой) ──
-const TG_BOT_USERNAME = 'SoundWaveStudioBot';   // @SoundWaveStudioBot
+const TG_BOT_USERNAME = 'BloodWashStudioBot';   // @BloodWashStudioBot
 const TG_CHANNEL      = 'https://t.me/soundwavestudiosws';
 const TG_VOICE_RECRUIT= 'https://t.me/soundwavestudiosws'; // Канал набора
 

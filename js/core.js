@@ -1,132 +1,132 @@
 // ============================================================
-//  js/core.js — Утилиты: toast, modal, навигация, роли, ачивки
+//  js/core.js - Основные утилиты Blood Wash Studio
 // ============================================================
 
-export const esc = (s) =>
-    s ? s.toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : '';
+let toastTimeout = null;
 
-export const ROLE_LABELS = {
-    admin:     { label: 'АДМИНИСТРАТОР', cls: 'role-admin', icon: 'fa-shield-alt'    },
-    moderator: { label: 'МОДЕРАТОР',     cls: 'role-mod',   icon: 'fa-user-check'    },
-    dub:       { label: 'АКТЁР ДУБЛЯЖА', cls: 'role-dub',   icon: 'fa-microphone-alt'},
-    user:      { label: 'ПОЛЬЗОВАТЕЛЬ',  cls: 'role-user',  icon: 'fa-user'          }
-};
-
-export function getRoleBadgeHTML(role) {
-    const r = ROLE_LABELS[role] || ROLE_LABELS.user;
-    return `<span class="role-badge ${r.cls}"><i class="fas ${r.icon}"></i> ${r.label}</span>`;
+// ── Экранирование HTML ──
+export function esc(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 }
 
-// ── Toast-уведомления ──
-export function showToast(msg, type = 'success') {
+// ── Toast уведомления ──
+export function showToast(message, type = 'info') {
     const container = document.getElementById('toast-container');
-    if (!container) return;
-    const t = document.createElement('div');
-    t.className = `toast ${type}`;
-    t.innerHTML = msg;
-    container.appendChild(t);
+    if (!container) {
+        console.warn('Toast container not found');
+        return;
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    let icon = 'ℹ️';
+    if (type === 'success') icon = '✅';
+    if (type === 'error') icon = '❌';
+    if (type === 'warning') icon = '⚠️';
+    
+    toast.innerHTML = `${icon} ${esc(message)}`;
+    container.appendChild(toast);
+    
     setTimeout(() => {
-        t.style.animation = 'fadeOut 0.3s forwards';
-        setTimeout(() => t.remove(), 300);
+        toast.style.animation = 'fadeOut 0.3s ease forwards';
+        setTimeout(() => toast.remove(), 300);
     }, 4000);
 }
 
-// ── Ачивка-уведомление ──
-export function showAchievementPopup(ach, isFullscreen = false) {
-    const existing = document.getElementById('ach-popup');
-    if (existing) existing.remove();
-
-    const popup = document.createElement('div');
-    popup.id = 'ach-popup';
-    popup.className = isFullscreen ? 'ach-popup ach-popup--fs' : 'ach-popup';
-    // Используем textContent для имени/описания (защита от XSS и проблем с эмодзи)
-    const imgDiv  = document.createElement('div');
-    imgDiv.className = 'ach-popup-img';
-    imgDiv.textContent = ach.img;   // textContent корректно рендерит эмодзи
-
-    const textDiv   = document.createElement('div');
-    textDiv.className = 'ach-popup-text';
-
-    const labelDiv  = document.createElement('div');
-    labelDiv.className = 'ach-popup-label';
-    labelDiv.textContent = 'Новое достижение!';
-
-    const nameDiv   = document.createElement('div');
-    nameDiv.className = 'ach-popup-name';
-    nameDiv.textContent = ach.name;
-
-    const descDiv   = document.createElement('div');
-    descDiv.className = 'ach-popup-desc';
-    descDiv.textContent = ach.desc;
-
-    textDiv.appendChild(labelDiv);
-    textDiv.appendChild(nameDiv);
-    textDiv.appendChild(descDiv);
-    popup.appendChild(imgDiv);
-    popup.appendChild(textDiv);
-
-    document.body.appendChild(popup);
-    requestAnimationFrame(() => popup.classList.add('ach-popup--visible'));
-    setTimeout(() => {
-        popup.classList.remove('ach-popup--visible');
-        setTimeout(() => popup.remove(), 500);
-    }, 5000);
-}
-
-// ── Модальные окна ──
+// ── Закрыть все модалки ──
 export function closeModals() {
-    document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.style.display = 'none';
+    });
 }
 
 // ── Навигация ──
 export function navigate(page, pushState = true) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(s => s.classList.remove('active'));
+    
     const target = document.getElementById(page);
-    if (target) target.classList.add('active');
-    const navMap = { home:'n-home', team:'n-team', 'team-page':'n-team', profile:'n-profile', dubin:'n-dubin', view:'n-home', order:'n-order' };
-    const navEl = document.getElementById(navMap[page]);
-    if (navEl) navEl.classList.add('active');
-    if (page !== 'view') {
-        // Очищаем iframe чтобы остановить воспроизведение
-        const iframes = document.querySelectorAll('.swsp-iframe');
-        iframes.forEach(f => { try { f.src = ''; } catch(e) {} });
+    if (target) {
+        target.classList.add('active');
+    } else {
+        console.warn(`Page "${page}" not found`);
+        const home = document.getElementById('home');
+        if (home) home.classList.add('active');
     }
-    if (pushState) history.pushState(null, '', '#' + page);
+    
+    const navMap = {
+        'home': 'n-home',
+        'team': 'n-team',
+        'profile': 'n-profile',
+        'dubin': 'n-dubin',
+        'order': 'n-order'
+    };
+    
+    const activeId = navMap[page];
+    if (activeId) {
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        const activeLink = document.getElementById(activeId);
+        if (activeLink) activeLink.classList.add('active');
+    }
+    
+    if (pushState && page !== 'view') {
+        window.history.pushState(null, '', '#' + page);
+    }
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ── Поиск: кнопка открытия/закрытия ──
-// Вызывает enableSearch/disableSearch из releases.js
-window.openSearch = () => {
-    const wrap  = document.getElementById('search-wrap');
-    const input = document.getElementById('main-search');
-    if (!wrap) return;
-    wrap.classList.add('search-open');
-    // Включаем поиск
-    if (window._releasesEnableSearch) window._releasesEnableSearch();
+// ── Получить HTML бейджа роли ──
+export function getRoleBadgeHTML(role) {
+    const roles = {
+        'admin': ['role-admin', '👑', 'Администратор'],
+        'dub': ['role-dub', '🎙️', 'Актёр дубляжа'],
+        'moderator': ['role-mod', '🛡️', 'Модератор'],
+        'user': ['role-user', '👤', 'Пользователь']
+    };
+    
+    const [className, icon, label] = roles[role] || roles['user'];
+    return `<span class="role-badge ${className}"><i class="fas ${getIconClass(icon)}"></i> ${label}</span>`;
+}
+
+function getIconClass(emoji) {
+    const map = {
+        '👑': 'fa-crown',
+        '🎙️': 'fa-microphone-alt',
+        '🛡️': 'fa-shield-alt',
+        '👤': 'fa-user'
+    };
+    return map[emoji] || 'fa-user';
+}
+
+// ── Показать попап достижения ──
+export function showAchievementPopup(ach, isFullscreen = false) {
+    const existing = document.querySelector('.ach-popup');
+    if (existing) existing.remove();
+    
+    const popup = document.createElement('div');
+    popup.className = `ach-popup ${isFullscreen ? 'ach-popup--fs' : ''}`;
+    popup.innerHTML = `
+        <div class="ach-popup-img">${ach.img}</div>
+        <div>
+            <div class="ach-popup-label">ДОСТИЖЕНИЕ ПОЛУЧЕНО!</div>
+            <div class="ach-popup-name">${esc(ach.name)}</div>
+            <div class="ach-popup-desc">${esc(ach.desc)}</div>
+        </div>
+    `;
+    
+    document.body.appendChild(popup);
+    setTimeout(() => popup.classList.add('ach-popup--visible'), 10);
+    
     setTimeout(() => {
-        if (input) { input.focus(); input.select(); }
-    }, 350);
-};
-
-window.closeSearch = () => {
-    const wrap  = document.getElementById('search-wrap');
-    const input = document.getElementById('main-search');
-    if (!wrap) return;
-    wrap.classList.remove('search-open');
-    if (input) input.value = '';
-    // Выключаем поиск и перерендериваем
-    if (window._releasesDisableSearch) window._releasesDisableSearch();
-    if (window.filterData) window.filterData();
-};
-
-// Закрыть поиск кликом вне него
-document.addEventListener('click', (e) => {
-    const wrap = document.getElementById('search-wrap');
-    if (!wrap) return;
-    if (wrap.classList.contains('search-open') && !wrap.contains(e.target)) {
-        const input = document.getElementById('main-search');
-        if (!input?.value) window.closeSearch();
-    }
-}, true);
+        popup.classList.remove('ach-popup--visible');
+        setTimeout(() => popup.remove(), 400);
+    }, 4000);
+}
