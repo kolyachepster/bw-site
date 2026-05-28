@@ -1,6 +1,6 @@
-# 🎙️ Sound Wave Studio — Сайт студии
+# 🎙️ BlooodWash Studio — Сайт студии
 
-Сайт студии фандаба **Sound Wave Studio**: релизы, команда, DUB-in платформа.
+Сайт студии фандаба **BloodWash Studio**: релизы, команда, DUB-in платформа.
 
 ---
 
