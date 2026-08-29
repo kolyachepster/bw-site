@@ -14,6 +14,9 @@ import {
 import { esc, showToast, closeModals, getRoleBadgeHTML } from './core.js';
 import { checkAndAwardAch } from './achievements.js';
 
+// ============================================
+//  ЛОГИН / РЕГИСТРАЦИЯ
+// ============================================
 export function initAuthListeners(auth, db) {
     const btnLogin = document.getElementById('btn-login');
     const btnReg = document.getElementById('btn-reg');
@@ -27,8 +30,17 @@ export function initAuthListeners(auth, db) {
             if (!email || !pass) return showToast('Заполните все поля!', 'error');
             
             try {
+                // ВХОД
                 await signInWithEmailAndPassword(auth, email, pass);
+                
+                // ✅ ПОСЛЕ УСПЕШНОГО ВХОДА СРАЗУ ПЕРЕКЛЮЧАЕМ UI
                 showToast('Вход выполнен!', 'success');
+                
+                // Ждем 500мс и переключаем на профиль
+                setTimeout(() => {
+                    if (window.navigate) window.navigate('profile');
+                }, 500);
+                
             } catch (error) {
                 console.error('Ошибка входа:', error);
                 showToast(getAuthErrorMsg(error.code), 'error');
@@ -45,6 +57,7 @@ export function initAuthListeners(auth, db) {
             if (pass.length < 6) return showToast('Пароль минимум 6 символов!', 'error');
             
             try {
+                // РЕГИСТРАЦИЯ
                 const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
                 const user = userCredential.user;
                 
@@ -60,6 +73,12 @@ export function initAuthListeners(auth, db) {
                 });
                 
                 showToast('Регистрация успешна!', 'success');
+                
+                // ✅ СРАЗУ ПЕРЕКЛЮЧАЕМ UI
+                setTimeout(() => {
+                    if (window.navigate) window.navigate('profile');
+                }, 500);
+                
             } catch (error) {
                 console.error('Ошибка регистрации:', error);
                 showToast(getAuthErrorMsg(error.code), 'error');
@@ -72,6 +91,12 @@ export function initAuthListeners(auth, db) {
             try {
                 await auth.signOut();
                 showToast('Вы вышли из аккаунта', 'info');
+                
+                // ✅ СРАЗУ ПЕРЕКЛЮЧАЕМ НА ГЛАВНУЮ
+                setTimeout(() => {
+                    if (window.navigate) window.navigate('home');
+                }, 500);
+                
             } catch (error) {
                 console.error('Ошибка выхода:', error);
             }
@@ -79,6 +104,9 @@ export function initAuthListeners(auth, db) {
     }
 }
 
+// ============================================
+//  ОШИБКИ
+// ============================================
 function getAuthErrorMsg(code) {
     const errorMap = {
         'auth/invalid-email': 'Неверный формат email!',
@@ -92,6 +120,9 @@ function getAuthErrorMsg(code) {
     return errorMap[code] || 'Произошла ошибка. Попробуйте еще раз!';
 }
 
+// ============================================
+//  ПРИМЕНЕНИЕ UI
+// ============================================
 export function applyUserUI(userData, isAdmin, isDub) {
     document.getElementById('auth-ui').style.display = 'none';
     document.getElementById('user-ui').style.display = 'block';
@@ -133,7 +164,11 @@ export function resetUserUI() {
     document.getElementById('n-dubin').style.display = 'none';
 }
 
+// ============================================
+//  ДЕЙСТВИЯ ПОЛЬЗОВАТЕЛЯ
+// ============================================
 export function bindAuthActions(auth, db, getState) {
+    
     window.resetPassword = async () => {
         const email = document.getElementById('email').value.trim();
         if (!email) return showToast('Введите email!', 'error');
@@ -141,6 +176,9 @@ export function bindAuthActions(auth, db, getState) {
         try {
             await sendPasswordResetEmail(auth, email);
             showToast('Письмо для сброса пароля отправлено!', 'success');
+            setTimeout(() => {
+                window.location.href = 'reset-password.html';
+            }, 1500);
         } catch (error) {
             showToast(getAuthErrorMsg(error.code), 'error');
         }
@@ -160,6 +198,10 @@ export function bindAuthActions(auth, db, getState) {
         await updateDoc(doc(db, 'users', auth.currentUser.uid), updates);
         
         if (nickname) await updateProfile(auth.currentUser, { displayName: nickname });
+        
+        // Обновляем UI
+        document.getElementById('u-nick').textContent = nickname || userData.nickname;
+        if (avatar) document.getElementById('u-ava').src = avatar;
         
         closeModals();
         showToast('Профиль обновлён!', 'success');

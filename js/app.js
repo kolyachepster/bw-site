@@ -77,6 +77,12 @@ onAuthStateChanged(auth, async (user) => {
                 state.isMod = state.userData.role === 'moderator';
                 applyUserUI(state.userData, state.isAdmin, state.isDub);
                 renderAchProfile(state.userData);
+                
+                // ✅ ДОБАВЬТЕ ЭТУ СТРОЧКУ — если пользователь авторизован, сразу переходим в профиль
+                if (window.location.hash === '#profile' || window.location.hash === '') {
+                    window.navigate('profile');
+                }
+                
             } else {
                 resetUserUI();
             }
