@@ -85,7 +85,7 @@ onAuthStateChanged(auth, async (user) => {
                 // ✅ ВАЖНО: Если мы на странице релиза, перезагружаем комментарии
                 if (state.curProj) {
                     const { loadComments } = await import('./comments.js');
-                    await loadComments(db, auth, state.curProj, state.userData, state.isAdmin);
+                    await loadComments(db, auth, state.curProj);
                 }
                 
             } else {
@@ -108,7 +108,7 @@ onAuthStateChanged(auth, async (user) => {
         // ✅ ВАЖНО: Если мы на странице релиза, перезагружаем комментарии
         if (state.curProj) {
             const { loadComments } = await import('./comments.js');
-            await loadComments(db, auth, state.curProj, null, false);
+            await loadComments(db, auth, state.curProj);
         }
     }
 
