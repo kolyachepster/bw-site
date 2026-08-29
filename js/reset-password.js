@@ -1,5 +1,5 @@
 // ============================================================
-//  js/reset-password.js — Восстановление пароля через Firebase
+//  js/reset-password.js вЂ” Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РїР°СЂРѕР»СЏ С‡РµСЂРµР· Firebase
 // ============================================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
@@ -8,7 +8,7 @@ import {
     sendPasswordResetEmail 
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-// ?? Firebase конфигурация (ВАШИ РЕАЛЬНЫЕ КЛЮЧИ) ??
+// Firebase РєРѕРЅС„РёРіСѓСЂР°С†РёСЏ (Р’РђРЁР Р Р•РђР›Р¬РќР«Р• РљР›Р®Р§Р)
 const firebaseConfig = {
     apiKey: "AIzaSyDRC7nVdYsnRQqKCkNd3TipjNsTLPmJkPQ",
     authDomain: "bw-site-6aeee.firebaseapp.com",
@@ -20,11 +20,11 @@ const firebaseConfig = {
     measurementId: "G-HSWDG87NHQ"
 };
 
-// Инициализация Firebase
+// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ?? Показ toast-уведомлений ??
+// РџРѕРєР°Р· toast-СѓРІРµРґРѕРјР»РµРЅРёР№
 function showToast(message, type = 'success') {
     const container = document.getElementById('toast-container');
     if (!container) return;
@@ -42,7 +42,7 @@ function showToast(message, type = 'success') {
         font-weight: 600;
         font-size: 14px;
         z-index: 10000;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        box-shadow: 0 10px 30px rgba(210, 105, 30, 0.3);
         animation: slideIn 0.3s ease;
         max-width: 400px;
     `;
@@ -56,7 +56,7 @@ function showToast(message, type = 'success') {
     }, 4000);
 }
 
-// Добавляем CSS анимации
+// Р”РѕР±Р°РІР»СЏРµРј CSS Р°РЅРёРјР°С†РёРё
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn {
@@ -70,21 +70,21 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ?? Человекочитаемые ошибки Firebase Auth ??
+// Р§РµР»РѕРІРµРєРѕС‡РёС‚Р°РµРјС‹Рµ РѕС€РёР±РєРё Firebase Auth
 function authErrorMsg(code) {
     const errorMap = {
-        'auth/invalid-email': 'Неверный формат email!',
-        'auth/user-not-found': 'Пользователь с таким email не найден!',
-        'auth/too-many-requests': 'Слишком много попыток. Попробуйте позже.',
-        'auth/network-request-failed': 'Ошибка сети. Проверьте подключение.',
-        'auth/internal-error': 'Внутренняя ошибка сервера. Попробуйте позже.',
-        'auth/invalid-action-code': 'Ссылка недействительна или уже использована.',
-        'auth/expired-action-code': 'Срок действия ссылки истек.',
+        'auth/invalid-email': 'РќРµРІРµСЂРЅС‹Р№ С„РѕСЂРјР°С‚ email!',
+        'auth/user-not-found': 'РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ С‚Р°РєРёРј email РЅРµ РЅР°Р№РґРµРЅ!',
+        'auth/too-many-requests': 'РЎР»РёС€РєРѕРј РјРЅРѕРіРѕ РїРѕРїС‹С‚РѕРє. РџРѕРїСЂРѕР±СѓР№С‚Рµ РїРѕР·Р¶Рµ.',
+        'auth/network-request-failed': 'РћС€РёР±РєР° СЃРµС‚Рё. РџСЂРѕРІРµСЂСЊС‚Рµ РїРѕРґРєР»СЋС‡РµРЅРёРµ.',
+        'auth/internal-error': 'Р’РЅСѓС‚СЂРµРЅРЅСЏСЏ РѕС€РёР±РєР° СЃРµСЂРІРµСЂР°. РџРѕРїСЂРѕР±СѓР№С‚Рµ РїРѕР·Р¶Рµ.',
+        'auth/invalid-action-code': 'РЎСЃС‹Р»РєР° РЅРµРґРµР№СЃС‚РІРёС‚РµР»СЊРЅР° РёР»Рё СѓР¶Рµ РёСЃРїРѕР»СЊР·РѕРІР°РЅР°.',
+        'auth/expired-action-code': 'РЎСЂРѕРє РґРµР№СЃС‚РІРёСЏ СЃСЃС‹Р»РєРё РёСЃС‚РµРє.',
     };
-    return errorMap[code] || 'Произошла ошибка. Попробуйте ещё раз.';
+    return errorMap[code] || 'РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°. РџРѕРїСЂРѕР±СѓР№С‚Рµ РµС‰С‘ СЂР°Р·.';
 }
 
-// ?? Обработка формы восстановления пароля ??
+// РћР±СЂР°Р±РѕС‚РєР° С„РѕСЂРјС‹ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РїР°СЂРѕР»СЏ
 const resetForm = document.getElementById('reset-form');
 const resetBtn = document.getElementById('reset-btn');
 const resetEmailInput = document.getElementById('reset-email');
@@ -98,66 +98,66 @@ if (resetForm) {
         const email = resetEmailInput.value.trim();
         
         if (!email) {
-            showToast('Пожалуйста, введите email!', 'error');
+            showToast('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІРІРµРґРёС‚Рµ email!', 'error');
             return;
         }
         
-        // Простая валидация email
+        // РџСЂРѕСЃС‚Р°СЏ РІР°Р»РёРґР°С†РёСЏ email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            showToast('Пожалуйста, введите корректный email!', 'error');
+            showToast('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІРІРµРґРёС‚Рµ РєРѕСЂСЂРµРєС‚РЅС‹Р№ email!', 'error');
             return;
         }
         
-        // Показываем индикатор загрузки
+        // РџРѕРєР°Р·С‹РІР°РµРј РёРЅРґРёРєР°С‚РѕСЂ Р·Р°РіСЂСѓР·РєРё
         resetBtn.classList.add('loading');
-        resetBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+        resetBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> РћС‚РїСЂР°РІРєР°...';
         resetBtn.disabled = true;
         
         try {
-            // Настройки для письма восстановления пароля
+            // РќР°СЃС‚СЂРѕР№РєРё РґР»СЏ РїРёСЃСЊРјР° РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РїР°СЂРѕР»СЏ
             const actionCodeSettings = {
                 url: window.location.origin + '/index.html',
                 handleCodeInApp: false,
             };
             
-            // Отправка письма с Firebase
+            // РћС‚РїСЂР°РІРєР° РїРёСЃСЊРјР° СЃ Firebase
             await sendPasswordResetEmail(auth, email, actionCodeSettings);
             
-            // Успешная отправка
+            // РЈСЃРїРµС€РЅР°СЏ РѕС‚РїСЂР°РІРєР°
             if (successText) {
                 successText.innerHTML = `
-                    <strong>Письмо отправлено!</strong><br>
-                    Проверьте вашу почту <strong>${email}</strong>.<br>
-                    Ссылка действительна в течение 1 часа.
+                    <strong>РџРёСЃСЊРјРѕ РѕС‚РїСЂР°РІР»РµРЅРѕ!</strong><br>
+                    РџСЂРѕРІРµСЂСЊС‚Рµ РІР°С€Сѓ РїРѕС‡С‚Сѓ <strong>${email}</strong>.<br>
+                    РЎСЃС‹Р»РєР° РґРµР№СЃС‚РІРёС‚РµР»СЊРЅР° РІ С‚РµС‡РµРЅРёРµ 1 С‡Р°СЃР°.
                 `;
             }
             if (successMsg) successMsg.style.display = 'block';
             
-            showToast('Письмо для восстановления отправлено!', 'success');
+            showToast('РџРёСЃСЊРјРѕ РґР»СЏ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РѕС‚РїСЂР°РІР»РµРЅРѕ!', 'success');
             
-            // Перенаправление через 5 секунд
+            // РџРµСЂРµРЅР°РїСЂР°РІР»РµРЅРёРµ С‡РµСЂРµР· 5 СЃРµРєСѓРЅРґ
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 5000);
             
         } catch (error) {
-            console.error('Ошибка восстановления пароля:', error);
+            console.error('РћС€РёР±РєР° РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РїР°СЂРѕР»СЏ:', error);
             showToast(authErrorMsg(error.code), 'error');
             
-            // Возвращаем кнопку в исходное состояние
+            // Р’РѕР·РІСЂР°С‰Р°РµРј РєРЅРѕРїРєСѓ РІ РёСЃС…РѕРґРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
             resetBtn.classList.remove('loading');
-            resetBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Отправить письмо';
+            resetBtn.innerHTML = '<i class="fas fa-paper-plane"></i> РћС‚РїСЂР°РІРёС‚СЊ РїРёСЃСЊРјРѕ';
             resetBtn.disabled = false;
         }
     });
 }
 
-// ?? Автофокус на поле email ??
+// РђРІС‚РѕС„РѕРєСѓСЃ РЅР° РїРѕР»Рµ email
 window.addEventListener('DOMContentLoaded', () => {
     if (resetEmailInput) resetEmailInput.focus();
     
-    // Проверяем, есть ли параметр email в URL (для автозаполнения)
+    // РџСЂРѕРІРµСЂСЏРµРј, РµСЃС‚СЊ Р»Рё РїР°СЂР°РјРµС‚СЂ email РІ URL (РґР»СЏ Р°РІС‚РѕР·Р°РїРѕР»РЅРµРЅРёСЏ)
     const urlParams = new URLSearchParams(window.location.search);
     const emailParam = urlParams.get('email');
     if (emailParam && resetEmailInput) {

@@ -1,5 +1,5 @@
 // ============================================================
-//  js/app.js — Точка входа. Blood Wash Studio
+//  js/app.js вЂ” РўРѕС‡РєР° РІС…РѕРґР°. NekoSound Studio
 // ============================================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
@@ -17,17 +17,17 @@ import { bindUsers } from './users.js';
 import { initDubinPanel, bindDubin } from './dubin.js';
 import { bindOrder } from './order.js';
 
-// Инициализация Firebase с ВАШИМИ ключами
+// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ Firebase
 const app = initializeApp(FIREBASE_CONFIG);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// Инициализация EmailJS с ВАШИМ ключом
+// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ EmailJS
 if (window.emailjs) {
     emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
 }
 
-// ?? Единое хранилище состояния ??
+// Р•РґРёРЅРѕРµ С…СЂР°РЅРёР»РёС‰Рµ СЃРѕСЃС‚РѕСЏРЅРёСЏ
 const state = {
     userData: null,
     isAdmin: false,
@@ -37,7 +37,7 @@ const state = {
 };
 const getState = () => state;
 
-// ?? Регистрируем все window.* ??
+// Р РµРіРёСЃС‚СЂРёСЂСѓРµРј РІСЃРµ window.*
 bindReleases(db, auth, getState);
 bindComments(db, auth, getState);
 bindTeam(db, getState);
@@ -50,11 +50,11 @@ bindOrder(db, auth, getState);
 window.closeModals = closeModals;
 window.showToast = showToast;
 
-// Мост для поиска
+// РњРѕСЃС‚ РґР»СЏ РїРѕРёСЃРєР°
 window._releasesEnableSearch = enableSearch;
 window._releasesDisableSearch = disableSearch;
 
-// ?? Navigate с загрузкой данных секций ??
+// Navigate СЃ Р·Р°РіСЂСѓР·РєРѕР№ РґР°РЅРЅС‹С… СЃРµРєС†РёР№
 window.navigate = (page, pushState = true) => {
     navigate(page, pushState);
     if (page === 'team') window.loadTeam?.();
@@ -65,7 +65,7 @@ window.navigate = (page, pushState = true) => {
     if (page === 'profile' && state.userData) window.loadMyLists?.();
 };
 
-// ?? Auth State ??
+// Auth State
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         try {
@@ -81,7 +81,7 @@ onAuthStateChanged(auth, async (user) => {
                 resetUserUI();
             }
         } catch (e) {
-            console.error('Профиль:', e);
+            console.error('РџСЂРѕС„РёР»СЊ:', e);
             resetUserUI();
         }
     } else {

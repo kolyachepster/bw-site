@@ -1,10 +1,10 @@
 // ============================================================
-//  js/core.js - Основные утилиты Blood Wash Studio
+//  js/core.js — Основные утилиты NekoSound Studio
 // ============================================================
 
 let toastTimeout = null;
 
-// ── Экранирование HTML ──
+// Экранирование HTML
 export function esc(str) {
     if (!str) return '';
     return String(str)
@@ -15,7 +15,7 @@ export function esc(str) {
         .replace(/'/g, '&#39;');
 }
 
-// ── Toast уведомления ──
+// Toast уведомления
 export function showToast(message, type = 'info') {
     const container = document.getElementById('toast-container');
     if (!container) {
@@ -40,14 +40,14 @@ export function showToast(message, type = 'info') {
     }, 4000);
 }
 
-// ── Закрыть все модалки ──
+// Закрыть все модалки
 export function closeModals() {
     document.querySelectorAll('.modal').forEach(modal => {
         modal.style.display = 'none';
     });
 }
 
-// ── Навигация ──
+// Навигация
 export function navigate(page, pushState = true) {
     const sections = document.querySelectorAll('.section');
     sections.forEach(s => s.classList.remove('active'));
@@ -83,7 +83,7 @@ export function navigate(page, pushState = true) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ── Получить HTML бейджа роли ──
+// Получить HTML бейджа роли
 export function getRoleBadgeHTML(role) {
     const roles = {
         'admin': ['role-admin', '👑', 'Администратор'],
@@ -106,7 +106,7 @@ function getIconClass(emoji) {
     return map[emoji] || 'fa-user';
 }
 
-// ── Показать попап достижения ──
+// Показать попап достижения
 export function showAchievementPopup(ach, isFullscreen = false) {
     const existing = document.querySelector('.ach-popup');
     if (existing) existing.remove();

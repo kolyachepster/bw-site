@@ -1,4 +1,4 @@
-// config/config.js - Конфигурация Blood Wash Studio
+// config/config.js - Конфигурация NekoSound Studio
 
 // ===== FIREBASE CONFIGURATION =====
 export const FIREBASE_CONFIG = {
@@ -21,16 +21,16 @@ export const EMAILJS_CONFIG = {
 
 // ===== SOCIAL LINKS =====
 export const SOCIAL_LINKS = {
-    vk: 'https://vk.com/bloodwashstudio',
-    telegram: 'https://t.me/bloodwashstudio',
-    youtube: 'https://www.youtube.com/@BloodWashStudio'
+    vk: 'https://vk.com/nekosoundstudio',
+    telegram: 'https://t.me/nekosoundstudio',
+    youtube: 'https://www.youtube.com/@NekosoundStudio'
 };
 
 // ===== JOIN FORM URL =====
 export const JOIN_FORM_URL = 'https://forms.gle/fRv36rP1RXn6sN3dA';
 
 // ===== PLACEHOLDERS =====
-export const PLACEHOLDER_IMG = 'https://via.placeholder.com/300x400/141417/8b0000?text=BWS';
+export const PLACEHOLDER_IMG = 'https://via.placeholder.com/300x400/fff0f5/d2691e?text=NS';
 export const PLACEHOLDER_TEAM_IMG = 'https://api.dicebear.com/7.x/identicon/svg';
 
 // ===== SETTINGS =====

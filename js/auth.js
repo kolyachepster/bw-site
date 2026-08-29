@@ -1,163 +1,210 @@
 // ============================================================
-//  js/auth.js — Авторизация, профиль пользователя
+//  js/auth.js — Авторизация и профиль пользователя
 // ============================================================
 
 import {
-    signInWithEmailAndPassword, createUserWithEmailAndPassword,
-    signOut, sendPasswordResetEmail, updatePassword, updateEmail
+    getAuth, onAuthStateChanged, signInWithEmailAndPassword,
+    createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
 import {
-    doc, setDoc, updateDoc, getDocs, collection, query, where
+    doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-import { showToast, closeModals, navigate, getRoleBadgeHTML } from './core.js';
-import { renderAchProfile } from './achievements.js';
-
-let loginAttempts = 0;
-
-
-// ── Человекочитаемые ошибки Firebase Auth ──
-function authErrorMsg(code) {
-    const map = {
-        'auth/email-already-in-use':   'Данный email уже занят!',
-        'auth/invalid-email':          'Неверный формат email!',
-        'auth/weak-password':          'Пароль слишком простой (мин. 6 символов)!',
-        'auth/invalid-credential':     'Неверный пароль или email!',
-        'auth/wrong-password':         'Неверный пароль!',
-        'auth/user-not-found':         'Пользователь с таким email не найден!',
-        'auth/too-many-requests':      'Слишком много попыток. Попробуйте позже.',
-        'auth/network-request-failed': 'Ошибка сети. Проверьте подключение.',
-        'auth/user-disabled':          'Этот аккаунт заблокирован.',
-        'auth/requires-recent-login':  'Для этого действия войдите заново.',
-    };
-    return map[code] || 'Ошибка: попробуйте ещё раз.';
-}
+import { esc, showToast, closeModals, getRoleBadgeHTML } from './core.js';
+import { checkAndAwardAch } from './achievements.js';
 
 export function initAuthListeners(auth, db) {
-    document.getElementById('btn-login').onclick = async () => {
-        const e = document.getElementById('email').value.trim();
-        const p = document.getElementById('pass').value;
-        try {
-            await signInWithEmailAndPassword(auth, e, p);
-            showToast('Вход выполнен!'); loginAttempts = 0;
-        } catch(err) {
-            loginAttempts++;
-            if (loginAttempts >= 3) document.getElementById('reset-pass-block').style.display = 'block';
-            showToast(authErrorMsg(err.code), 'error');
-        }
-    };
+    const btnLogin = document.getElementById('btn-login');
+    const btnReg = document.getElementById('btn-reg');
+    const btnLogout = document.getElementById('btn-logout');
 
-    document.getElementById('btn-reg').onclick = async () => {
-        const e = document.getElementById('email').value.trim();
-        const p = document.getElementById('pass').value;
-        if (!e || p.length < 6) return showToast('Email и пароль (мин. 6 символов)!','error');
-        try {
-            const cred = await createUserWithEmailAndPassword(auth, e, p);
-            await setDoc(doc(db,'users',cred.user.uid), {
-                nickname: 'User_' + Math.floor(Math.random()*10000),
-                email: e, role: 'user', views: 0, subscribers: 0,
-                publicBio: '', publicLink: '',
-                achievements: [{ id:'newcomer', name:'Новичок', desc:'Зарегистрировался на сайте', img:'👋', date: Date.now(), hidden: false, giver:'Система' }]
-            });
-            showToast('Регистрация успешна!');
-        } catch(err) { showToast(authErrorMsg(err.code), 'error'); }
-    };
+    if (btnLogin) {
+        btnLogin.addEventListener('click', async () => {
+            const email = document.getElementById('email').value.trim();
+            const pass = document.getElementById('pass').value;
+            
+            if (!email || !pass) return showToast('Заполните все поля!', 'error');
+            
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
+                showToast('Вход выполнен!', 'success');
+            } catch (error) {
+                console.error('Ошибка входа:', error);
+                showToast(getAuthErrorMsg(error.code), 'error');
+            }
+        });
+    }
 
-    document.getElementById('btn-logout').onclick = () =>
-        signOut(auth).then(() => { showToast('Вы вышли'); navigate('home'); });
+    if (btnReg) {
+        btnReg.addEventListener('click', async () => {
+            const email = document.getElementById('email').value.trim();
+            const pass = document.getElementById('pass').value;
+            
+            if (!email || !pass) return showToast('Заполните все поля!', 'error');
+            if (pass.length < 6) return showToast('Пароль минимум 6 символов!', 'error');
+            
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+                const user = userCredential.user;
+                
+                await setDoc(doc(db, 'users', user.uid), {
+                    email: email,
+                    nickname: email.split('@')[0],
+                    avatar: '',
+                    role: 'user',
+                    views: 0,
+                    subs: 0,
+                    achievements: [],
+                    createdAt: Date.now()
+                });
+                
+                showToast('Регистрация успешна!', 'success');
+            } catch (error) {
+                console.error('Ошибка регистрации:', error);
+                showToast(getAuthErrorMsg(error.code), 'error');
+            }
+        });
+    }
+
+    if (btnLogout) {
+        btnLogout.addEventListener('click', async () => {
+            try {
+                await auth.signOut();
+                showToast('Вы вышли из аккаунта', 'info');
+            } catch (error) {
+                console.error('Ошибка выхода:', error);
+            }
+        });
+    }
+}
+
+function getAuthErrorMsg(code) {
+    const errorMap = {
+        'auth/invalid-email': 'Неверный формат email!',
+        'auth/user-not-found': 'Пользователь не найден!',
+        'auth/wrong-password': 'Неверный пароль!',
+        'auth/email-already-in-use': 'Email уже зарегистрирован!',
+        'auth/weak-password': 'Пароль слишком слабый!',
+        'auth/too-many-requests': 'Слишком много попыток. Подождите!',
+        'auth/network-request-failed': 'Ошибка сети!'
+    };
+    return errorMap[code] || 'Произошла ошибка. Попробуйте еще раз!';
 }
 
 export function applyUserUI(userData, isAdmin, isDub) {
-    document.getElementById('auth-ui').style.display        = 'none';
-    document.getElementById('user-ui').style.display        = 'block';
-    document.getElementById('comm-form').style.display      = 'block';
-    document.getElementById('comm-auth-msg').style.display  = 'none';
-
-    document.getElementById('u-nick').innerText  = userData.nickname;
-    document.getElementById('ed-nick').value     = userData.nickname;
-    document.getElementById('u-ava').src         = userData.avatar||'https://api.dicebear.com/7.x/identicon/svg';
-    document.getElementById('ed-ava').value      = userData.avatar||'';
+    document.getElementById('auth-ui').style.display = 'none';
+    document.getElementById('user-ui').style.display = 'block';
+    
+    // Профиль
+    document.getElementById('u-ava').src = userData.avatar || 'https://api.dicebear.com/7.x/identicon/svg';
+    document.getElementById('u-nick').textContent = userData.nickname || 'Пользователь';
+    document.getElementById('u-views').textContent = userData.views || 0;
+    document.getElementById('u-subs').textContent = userData.subs || 0;
+    
+    // Бейдж роли
     document.getElementById('u-role-badge').innerHTML = getRoleBadgeHTML(userData.role);
-    document.getElementById('u-views').innerText = userData.views||0;
-    document.getElementById('u-subs').innerText  = userData.subscribers||0;
-
-    renderAchProfile(userData);
-
-    document.getElementById('adm-btn-rel').style.display   = isAdmin ? 'inline-flex' : 'none';
-    document.getElementById('adm-btn-team').style.display  = isAdmin ? 'inline-flex' : 'none';
-    document.getElementById('adm-btn-role').style.display  = isAdmin ? 'inline-flex' : 'none';
-    document.getElementById('adm-ach-panel').style.display = isAdmin ? 'block' : 'none';
-    document.getElementById('n-dubin').style.display       = isDub   ? 'block' : 'none';
-
-    // Публичная информация
-    const pubBio  = document.getElementById('pub-bio');
-    const pubLink = document.getElementById('pub-link');
-    if (pubBio)  pubBio.value  = userData.publicBio  || '';
-    if (pubLink) pubLink.value = userData.publicLink || '';
+    
+    // Кнопки админа
+    if (isAdmin) {
+        document.getElementById('adm-btn-rel').style.display = 'inline-flex';
+        document.getElementById('adm-btn-team').style.display = 'inline-flex';
+        document.getElementById('adm-btn-role').style.display = 'inline-flex';
+        document.getElementById('adm-ach-panel').style.display = 'block';
+    }
+    
+    // DUB-in ссылка
+    if (isDub) {
+        document.getElementById('n-dubin').style.display = 'block';
+    }
 }
 
 export function resetUserUI() {
-    document.getElementById('auth-ui').style.display        = 'block';
-    document.getElementById('user-ui').style.display        = 'none';
-    document.getElementById('comm-form').style.display      = 'none';
-    document.getElementById('comm-auth-msg').style.display  = 'block';
-    ['adm-btn-rel','adm-btn-team','adm-btn-role','adm-ach-panel','n-dubin'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = 'none';
-    });
+    document.getElementById('auth-ui').style.display = 'block';
+    document.getElementById('user-ui').style.display = 'none';
+    
+    // Скрыть админ-кнопки
+    document.getElementById('adm-btn-rel').style.display = 'none';
+    document.getElementById('adm-btn-team').style.display = 'none';
+    document.getElementById('adm-btn-role').style.display = 'none';
+    document.getElementById('adm-ach-panel').style.display = 'none';
+    
+    // Скрыть DUB-in
+    document.getElementById('n-dubin').style.display = 'none';
 }
 
 export function bindAuthActions(auth, db, getState) {
-    window.resetPassword = () => {
-        const e = document.getElementById('email').value.trim();
-        if (!e) {
-            window.location.href = 'reset-password.html';
-        } else {
-            window.location.href = `reset-password.html?email=${encodeURIComponent(e)}`;
+    window.resetPassword = async () => {
+        const email = document.getElementById('email').value.trim();
+        if (!email) return showToast('Введите email!', 'error');
+        
+        try {
+            await sendPasswordResetEmail(auth, email);
+            showToast('Письмо для сброса пароля отправлено!', 'success');
+        } catch (error) {
+            showToast(getAuthErrorMsg(error.code), 'error');
         }
     };
-
-    window.openResetPasswordPage = () => {
-        const currentEmail = auth.currentUser?.email || '';
-        window.location.href = `reset-password.html?email=${encodeURIComponent(currentEmail)}`;
-    };
-
-    window.changeUserEmail = async () => {
-        const newEmail = document.getElementById('ed-new-email').value.trim();
-        if (!newEmail) return;
-        try { await updateEmail(auth.currentUser, newEmail); showToast('Email изменён!'); closeModals(); }
-        catch(err) { showToast(authErrorMsg(err.code), 'error'); }
-    };
-
-    window.changeUserPass = async () => {
-        const newPass = document.getElementById('ed-new-pass').value;
-        if (!newPass||newPass.length<6) return showToast('Минимум 6 символов!','error');
-        try { await updatePassword(auth.currentUser, newPass); showToast('Пароль изменён!'); closeModals(); }
-        catch(err) { 
-            if (err.code === 'auth/requires-recent-login') {
-                showToast('Для смены пароля войдите заново или используйте восстановление через email', 'error');
-                setTimeout(() => {
-                    if (confirm('Хотите восстановить пароль через email?')) {
-                        window.openResetPasswordPage();
-                    }
-                }, 2000);
-            } else {
-                showToast(authErrorMsg(err.code), 'error');
-            }
-        }
-    };
-
+    
     window.saveProfile = async () => {
         const { userData } = getState();
-        const nick = document.getElementById('ed-nick').value.trim();
-        const ava  = document.getElementById('ed-ava').value.trim();
-        if (!nick) return showToast('Введите никнейм!','error');
-        const snap = await getDocs(query(collection(db,'users'), where('nickname','==',nick)));
-        if (!snap.empty && nick !== userData.nickname) return showToast('Этот никнейм занят!','error');
-        await updateDoc(doc(db,'users',auth.currentUser.uid),{ nickname: nick, avatar: ava });
-        userData.nickname = nick; userData.avatar = ava;
-        document.getElementById('u-nick').innerText = nick;
-        document.getElementById('u-ava').src        = ava||'https://api.dicebear.com/7.x/identicon/svg';
-        showToast('Профиль обновлён!'); closeModals();
+        if (!userData || !auth.currentUser) return;
+        
+        const nickname = document.getElementById('ed-nick').value.trim();
+        const avatar = document.getElementById('ed-ava').value.trim();
+        
+        const updates = {};
+        if (nickname) updates.nickname = nickname;
+        if (avatar) updates.avatar = avatar;
+        
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), updates);
+        
+        if (nickname) await updateProfile(auth.currentUser, { displayName: nickname });
+        
+        closeModals();
+        showToast('Профиль обновлён!', 'success');
+    };
+    
+    window.changeUserEmail = async () => {
+        const email = document.getElementById('ed-new-email').value.trim();
+        if (!email) return showToast('Введите новый email!', 'error');
+        
+        try {
+            await auth.currentUser.updateEmail(email);
+            await updateDoc(doc(db, 'users', auth.currentUser.uid), { email });
+            showToast('Email обновлён!', 'success');
+        } catch (error) {
+            showToast(getAuthErrorMsg(error.code), 'error');
+        }
+    };
+    
+    window.changeUserPass = async () => {
+        const pass = document.getElementById('ed-new-pass').value;
+        if (!pass || pass.length < 6) return showToast('Пароль минимум 6 символов!', 'error');
+        
+        try {
+            await auth.currentUser.updatePassword(pass);
+            showToast('Пароль обновлён!', 'success');
+        } catch (error) {
+            showToast(getAuthErrorMsg(error.code), 'error');
+        }
+    };
+    
+    window.savePublicProfile = async () => {
+        const { userData } = getState();
+        if (!userData || !auth.currentUser) return;
+        
+        const bio = document.getElementById('pub-bio').value.trim();
+        const link = document.getElementById('pub-link').value.trim();
+        
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+            bio, link,
+            profileFilled: true
+        });
+        
+        closeModals();
+        showToast('Публичный профиль сохранён!', 'success');
+        
+        await checkAndAwardAch(db, auth, userData, 'profile_ok');
     };
 }

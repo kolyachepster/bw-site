@@ -5,89 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-    <title>Blood Wash Studio — Профессиональная озвучка и дубляж</title>
-    <meta name="description" content="Студия фандаба Blood Wash Studio: качественный дубляж, озвучка сериалов, фильмов, мультфильмов и аниме.">
+    <title>NekoSound Studio — Профессиональная озвучка и дубляж</title>
+    <meta name="description" content="Студия фандаба NekoSound Studio: качественный дубляж, озвучка сериалов, фильмов, мультфильмов и аниме.">
     <meta name="keywords" content="озвучка, дубляж, фандаб, аниме, сериалы, фильмы">
-    <meta name="author" content="Blood Wash Studio">
+    <meta name="author" content="NekoSound Studio">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <style>
-        /* Дополнительные стили для Blood Wash Studio */
-        :root {
-            --blood: #8b0000;
-            --accent: #8b0000;
-        }
-        .btn, .swsp-skip-btn, .swsp-next-btn {
-            background: var(--blood);
-        }
-        .btn:hover {
-            background: #6b0000;
-        }
-        .logo span, .nav-link:hover, .nav-link.active {
-            color: var(--blood);
-        }
-        .tag, .year-tag {
-            color: var(--blood);
-        }
-        .card:hover {
-            border-color: var(--blood);
-        }
-        .btn-blue {
-            background: #3b82f6;
-        }
-        .btn-purple {
-            background: #a855f7;
-        }
-        .dubin-hero {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, rgba(139,0,0,0.1), rgba(168,85,247,0.05));
-            border-radius: 24px;
-            margin-bottom: 40px;
-        }
-        .order-hero {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, rgba(139,0,0,0.05), rgba(168,85,247,0.05));
-            border-radius: 24px;
-            margin-bottom: 40px;
-        }
-        .order-type-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
-        }
-        .order-type-card {
-            background: var(--card-bg);
-            padding: 28px;
-            border-radius: 20px;
-            text-align: center;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: 0.2s;
-        }
-        .order-type-card:hover {
-            border-color: var(--blood);
-            transform: translateY(-4px);
-        }
-        .order-price-block {
-            background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(139,0,0,0.05));
-            padding: 20px;
-            border-radius: 16px;
-            text-align: center;
-            margin: 20px 0;
-        }
-        .order-price-value {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--dub);
-        }
-    </style>
 </head>
 <body>
 
@@ -95,7 +21,7 @@
 
 <!-- ==================== HEADER ==================== -->
 <header>
-    <div class="logo" onclick="if(window.navigate) navigate('home')">BLOOD<span> WASH</span> STUDIO</div>
+    <div class="logo" onclick="if(window.navigate) navigate('home')">Neko<span>Sound</span> studio</div>
     <nav>
         <a id="n-home" class="nav-link active" href="javascript:void(0)" onclick="if(window.navigate) navigate('home')">Релизы</a>
         <a id="n-team" class="nav-link" href="javascript:void(0)" onclick="if(window.navigate) navigate('team')">Состав</a>
@@ -123,7 +49,7 @@
                     <input type="text" id="main-search" class="search-field-input"
                            placeholder="Название релиза..."
                            oninput="if(window.filterData) filterData()"
-                           autocomplete="off" name="bws-s"
+                           autocomplete="off" name="ns-s"
                            onkeydown="if(event.key==='Escape' && window.closeSearch) closeSearch()">
                     <button class="search-close-btn" onclick="if(window.closeSearch) closeSearch()" title="Закрыть поиск">
                         <i class="fas fa-times"></i>
@@ -214,10 +140,10 @@
         <div id="auth-ui" style="max-width:360px; margin:40px auto;">
             <div style="background:var(--card-bg); padding:36px; border-radius:20px; border:1px solid var(--border); box-shadow:var(--shadow);">
                 <div style="text-align:center; margin-bottom:28px;">
-                    <div style="width:70px; height:70px; background:rgba(139,0,0,0.1); border-radius:20px; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; font-size:2rem; color:var(--blood);">
-                        <i class="fas fa-tint"></i>
+                    <div style="width:70px; height:70px; background:rgba(210,105,30,0.1); border-radius:20px; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; font-size:2rem; color:var(--accent);">
+                        <i class="fas fa-cat"></i>
                     </div>
-                    <h2 style="font-size:1.4rem; font-weight:900;">Blood Wash Studio</h2>
+                    <h2 style="font-size:1.4rem; font-weight:900;">NekoSound Studio</h2>
                     <p style="color:var(--text-dim); font-size:13px; margin-top:5px;">Войдите или зарегистрируйтесь</p>
                 </div>
                 <form onsubmit="return false;" autocomplete="off">
@@ -239,7 +165,7 @@
             <div class="profile-header">
                 <div style="position:relative;">
                     <img id="u-ava" src="https://api.dicebear.com/7.x/identicon/svg"
-                         style="width:110px; height:110px; border-radius:50%; object-fit:cover; border:3px solid var(--blood);">
+                         style="width:110px; height:110px; border-radius:50%; object-fit:cover; border:3px solid var(--accent);">
                 </div>
                 <div style="flex:1;">
                     <h2 id="u-nick" style="margin-bottom:8px; font-size:1.8rem; font-weight:900;"></h2>
@@ -263,7 +189,7 @@
             </div>
 
             <div style="background:var(--card-bg); padding:22px; border-radius:16px; border:1px solid var(--border); margin-bottom:20px;">
-                <h4 style="font-size:15px; margin-bottom:18px;"><i class="fas fa-bookmark" style="color:var(--blood); margin-right:6px;"></i> Мои списки</h4>
+                <h4 style="font-size:15px; margin-bottom:18px;"><i class="fas fa-bookmark" style="color:var(--accent); margin-right:6px;"></i> Мои списки</h4>
                 <div id="my-lists-wrap"><p style="font-size:13px; color:var(--text-dim);">Загрузка...</p></div>
             </div>
 
@@ -283,7 +209,7 @@
         <div class="dubin-hero">
             <div style="position:relative; z-index:2;">
                 <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(168,85,247,0.15); border:1px solid rgba(168,85,247,0.3); border-radius:20px; padding:6px 16px; font-size:11px; font-weight:800; color:var(--dub); text-transform:uppercase; letter-spacing:2px; margin-bottom:18px;">
-                    <i class="fas fa-microphone-alt"></i> Blood Wash Studio — DUB-in
+                    <i class="fas fa-microphone-alt"></i> NekoSound Studio — DUB-in
                 </div>
                 <h1 style="font-size:2.2rem; font-weight:900; margin-bottom:12px; letter-spacing:-1px;">Студийная Платформа</h1>
                 <p style="color:var(--text-dim); max-width:600px; line-height:1.7; font-size:15px;">Загружайте и скачивайте материалы для работы над озвучкой.</p>
@@ -300,7 +226,7 @@
         </div>
         <div id="dubin-suggest-panel">
             <div class="request-form">
-                <h2 style="font-size:1.4rem; font-weight:900; margin-bottom:8px;"><i class="fas fa-lightbulb" style="color:var(--blood);"></i> Предложить проект для озвучки</h2>
+                <h2 style="font-size:1.4rem; font-weight:900; margin-bottom:8px;"><i class="fas fa-lightbulb" style="color:var(--accent);"></i> Предложить проект для озвучки</h2>
                 <p style="color:var(--text-dim); font-size:13px; margin-bottom:22px; line-height:1.6;">Хотите, чтобы мы озвучили ваш любимый сериал, аниме или фильм?</p>
                 <label style="font-size:11px; color:var(--text-dim); font-weight:700; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:6px;">Название *</label>
                 <input type="text" id="sug-title" placeholder="Например: Атака Титанов...">
@@ -323,7 +249,7 @@
                 </div>
                 <button class="btn" style="width:100%;" onclick="if(window.sendSuggestion) sendSuggestion()"><i class="fas fa-paper-plane"></i> Отправить предложение</button>
             </div>
-            <div id="join-cta-block" style="margin-top:24px; background:linear-gradient(135deg,rgba(139,0,0,0.08),rgba(168,85,247,0.06)); border:1px solid rgba(139,0,0,0.2); border-radius:18px; padding:28px; text-align:center;">
+            <div id="join-cta-block" style="margin-top:24px; background:linear-gradient(135deg,rgba(210,105,30,0.08),rgba(168,85,247,0.06)); border:1px solid rgba(210,105,30,0.2); border-radius:18px; padding:28px; text-align:center;">
                 <div style="font-size:2.5rem; margin-bottom:12px;">🎙️</div>
                 <h3 style="margin-bottom:8px; font-size:1.2rem;">Хотите стать частью команды?</h3>
                 <p style="color:var(--text-dim); font-size:13px; margin-bottom:20px; line-height:1.6;">Если вы хотите попробовать себя в роли актёра дубляжа, звукорежиссёра или сценариста — заполните анкету.</p>
@@ -337,8 +263,8 @@
     <!-- ==================== ORDER ==================== -->
     <section id="order" class="section">
         <div class="order-hero">
-            <div class="order-hero-badge" style="display:inline-flex; align-items:center; gap:8px; background:rgba(139,0,0,0.1); border-radius:20px; padding:6px 16px; margin-bottom:18px;">
-                <i class="fas fa-microphone-alt"></i> Blood Wash Studio
+            <div class="order-hero-badge" style="display:inline-flex; align-items:center; gap:8px; background:rgba(210,105,30,0.1); border-radius:20px; padding:6px 16px; margin-bottom:18px;">
+                <i class="fas fa-microphone-alt"></i> NekoSound Studio
             </div>
             <h1 style="font-size:2rem; font-weight:900; margin-bottom:12px;">Заказать озвучку</h1>
             <p style="color:var(--text-dim);">Хотите, чтобы мы озвучили ваш любимый проект? Выберите тип предложения.</p>
@@ -500,12 +426,12 @@
 <footer class="footer-main">
     <div class="footer-inner" style="max-width:1300px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:40px;">
         <div class="footer-brand">
-            <span class="logo" style="font-size:1.3rem; font-weight:800;">BLOOD<span style="color:var(--blood);"> WASH</span> STUDIO</span>
+            <span class="logo" style="font-size:1.3rem; font-weight:800;">Neko<span style="color:var(--accent);">Sound</span> studio</span>
             <p style="font-size:13px; color:var(--text-dim); margin-top:16px; line-height:1.6;">Студия фандаба, которая создаёт качественный дубляж и озвучку аниме, сериалов, фильмов и мультфильмов. Всё — с душой и для фанатов.</p>
             <div class="footer-socials" style="display:flex; gap:12px; margin-top:20px;">
-                <a href="https://vk.com/bloodwashstudio" target="_blank" style="width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:center; transition:0.2s;"><i class="fab fa-vk"></i></a>
-                <a href="https://t.me/bloodwashstudio" target="_blank" style="width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:center; transition:0.2s;"><i class="fab fa-telegram-plane"></i></a>
-                <a href="https://www.youtube.com/@BloodWashStudio" target="_blank" style="width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:center; transition:0.2s;"><i class="fab fa-youtube"></i></a>
+                <a href="https://vk.com/nekosoundstudio" target="_blank" style="width:40px; height:40px; border-radius:50%; background:rgba(210,105,30,0.05); display:flex; align-items:center; justify-content:center; transition:0.2s;"><i class="fab fa-vk"></i></a>
+                <a href="https://t.me/nekosoundstudio" target="_blank" style="width:40px; height:40px; border-radius:50%; background:rgba(210,105,30,0.05); display:flex; align-items:center; justify-content:center; transition:0.2s;"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://www.youtube.com/@NekosoundStudio" target="_blank" style="width:40px; height:40px; border-radius:50%; background:rgba(210,105,30,0.05); display:flex; align-items:center; justify-content:center; transition:0.2s;"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
         <div class="footer-col">
@@ -517,19 +443,18 @@
         </div>
         <div class="footer-col">
             <h5 style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-bottom:20px; color:var(--text-dim);">Студия</h5>
-            <a href="https://vk.com/bloodwashstudio" target="_blank" style="display:block; margin-bottom:12px; color:var(--text-dim); text-decoration:none; font-size:0.85rem;">ВКонтакте</a>
-            <a href="https://t.me/bloodwashstudio" target="_blank" style="display:block; margin-bottom:12px; color:var(--text-dim); text-decoration:none; font-size:0.85rem;">Telegram</a>
-            <a href="https://www.youtube.com/@BloodWashStudio" target="_blank" style="display:block; margin-bottom:12px; color:var(--text-dim); text-decoration:none; font-size:0.85rem;">YouTube</a>
-            <a href="/cdn-cgi/l/email-protection#1e6d716b707a697c6b686f6e7b76706c686c5e79737f7772307d7173" style="display:block; margin-bottom:12px; color:var(--text-dim); text-decoration:none; font-size:0.85rem;">Написать нам</a>
+            <a href="https://vk.com/nekosoundstudio" target="_blank" style="display:block; margin-bottom:12px; color:var(--text-dim); text-decoration:none; font-size:0.85rem;">ВКонтакте</a>
+            <a href="https://t.me/nekosoundstudio" target="_blank" style="display:block; margin-bottom:12px; color:var(--text-dim); text-decoration:none; font-size:0.85rem;">Telegram</a>
+            <a href="https://www.youtube.com/@NekosoundStudio" target="_blank" style="display:block; margin-bottom:12px; color:var(--text-dim); text-decoration:none; font-size:0.85rem;">YouTube</a>
         </div>
         <div class="footer-col">
             <h5 style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-bottom:20px; color:var(--text-dim);">Хочешь с нами?</h5>
             <p style="font-size:13px; color:var(--text-dim); margin-bottom:12px; line-height:1.6;">Мы всегда рады новым актёрам дубляжа, редакторам и энтузиастам!</p>
-            <a href="https://forms.gle/fRv36rP1RXn6sN3dA" target="_blank" style="display:inline-block; background:var(--blood); color:white; padding:10px 20px; border-radius:40px; text-decoration:none; font-size:13px; font-weight:700;"><i class="fas fa-microphone-alt"></i> Подать заявку</a>
+            <a href="https://forms.gle/fRv36rP1RXn6sN3dA" target="_blank" style="display:inline-block; background:var(--accent); color:white; padding:10px 20px; border-radius:40px; text-decoration:none; font-size:13px; font-weight:700;"><i class="fas fa-microphone-alt"></i> Подать заявку</a>
         </div>
     </div>
     <div class="footer-bottom" style="text-align:center; padding-top:40px; margin-top:40px; border-top:1px solid var(--border); font-size:0.75rem; color:var(--text-dim);">
-        <p>© 2024–2026 Blood Wash Studio. Все права защищены.</p>
+        <p>© 2024–2026 NekoSound Studio. Все права защищены.</p>
         <a onclick="if(window.openPrivacy) openPrivacy()" style="color:var(--text-dim); text-decoration:none; cursor:pointer;">Политика конфиденциальности</a>
     </div>
 </footer>
@@ -537,7 +462,7 @@
 <!-- ==================== MODALS ==================== -->
 
 <div id="m-rel" class="modal"><div class="modal-content">
-    <h3 style="margin-bottom:18px; font-size:1.2rem; color:var(--blood);">Управление релизом</h3>
+    <h3 style="margin-bottom:18px; font-size:1.2rem; color:var(--accent);">Управление релизом</h3>
     <input type="hidden" id="ed-rel-id">
     <input type="text" id="ad-title" placeholder="Название">
     <select id="ad-genre">
@@ -546,7 +471,7 @@
         <option value="Трейлер">Трейлер</option><option value="Тизер">Тизер</option>
     </select>
     <input type="text" id="ad-year" placeholder="Год выпуска">
-    <input type="text" id="ad-voiceover" placeholder="Озвучка (Blood Wash Studio)">
+    <input type="text" id="ad-voiceover" placeholder="Озвучка (NekoSound Studio)">
     <input type="text" id="ad-authors" placeholder="Студия / Авторы">
     <input type="text" id="ad-img" placeholder="URL постера">
     <textarea id="ad-desc" placeholder="Описание сюжета..." rows="4"></textarea>
@@ -555,7 +480,7 @@
 </div></div>
 
 <div id="m-ep" class="modal"><div class="modal-content" style="max-width:580px;">
-    <h3 id="m-ep-heading" style="margin-bottom:18px; font-size:1.2rem; color:var(--blood);">Добавить медиа</h3>
+    <h3 id="m-ep-heading" style="margin-bottom:18px; font-size:1.2rem; color:var(--accent);">Добавить медиа</h3>
     <input type="hidden" id="ed-ep-idx">
     <select id="ad-ep-type">
         <option value="series">Серия / Фильм</option>
@@ -570,7 +495,7 @@
 </div></div>
 
 <div id="m-team" class="modal"><div class="modal-content">
-    <h3 style="margin-bottom:18px; font-size:1.2rem; color:var(--blood);">Участник команды</h3>
+    <h3 style="margin-bottom:18px; font-size:1.2rem; color:var(--accent);">Участник команды</h3>
     <input type="hidden" id="ed-team-id">
     <input type="text" id="ad-m-name" placeholder="Никнейм">
     <input type="text" id="ad-m-role" placeholder="Роль (Дабер, Редактор...)">
@@ -581,7 +506,7 @@
 </div></div>
 
 <div id="m-prof" class="modal"><div class="modal-content">
-    <h3 style="margin-bottom:18px; font-size:1.2rem; color:var(--blood);">Настройки аккаунта</h3>
+    <h3 style="margin-bottom:18px; font-size:1.2rem; color:var(--accent);">Настройки аккаунта</h3>
     <input type="text" id="ed-nick" placeholder="Никнейм">
     <input type="text" id="ed-ava" placeholder="URL аватара">
     <button class="btn" style="width:100%; margin-bottom:14px;" onclick="if(window.saveProfile) saveProfile()">Сохранить профиль</button>
@@ -705,7 +630,7 @@
 </div></div>
 
 <div id="m-user-profile" class="modal"><div class="modal-content" style="text-align:center;">
-    <img id="mu-ava" style="width:85px; height:85px; border-radius:50%; object-fit:cover; border:2px solid var(--blood); margin-bottom:10px;">
+    <img id="mu-ava" style="width:85px; height:85px; border-radius:50%; object-fit:cover; border:2px solid var(--accent); margin-bottom:10px;">
     <h2 id="mu-nick" style="margin-bottom:8px;"></h2>
     <div id="mu-role-badge" style="margin-bottom:12px; display:flex; justify-content:center;"></div>
     <p id="mu-bio" class="mu-bio-text" style="margin-bottom:12px;"></p>

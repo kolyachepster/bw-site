@@ -10,20 +10,19 @@ import {
 import { esc, showToast } from './core.js';
 import { checkAndAwardAch } from './achievements.js';
 
-// ── Загрузка и рендер комментариев ──
+// Загрузка и рендер комментариев
 export async function loadComments(db, auth, curProj, userData, isAdmin) {
     const snap = await getDocs(
-        query(collection(db, `releases/${curProj.id}/comments`), orderBy('time','desc'))
+        query(collection(db, `releases/${curProj.id}/comments`), orderBy('time', 'desc'))
     );
     document.getElementById('comm-count').innerText = snap.size;
     document.getElementById('comm-list').innerHTML = snap.docs.map(d => {
-        const c    = d.data();
-        // Упоминания хранятся как @никнейм (уже разрешённые при отправке)
+        const c = d.data();
         const text = esc(c.text).replace(/@([\wа-яА-ЯёЁ_-]+)/g,
             `<a href="#" class="mention-link" onclick="openUserProfileByName('$1');return false;">@$1</a>`);
         const canDel = isAdmin || (userData && c.uid === auth.currentUser?.uid);
         return `<div class="comm-item">
-            <img src="${esc(c.ava)||'https://api.dicebear.com/7.x/identicon/svg'}"
+            <img src="${esc(c.ava) || 'https://api.dicebear.com/7.x/identicon/svg'}"
                  class="comm-ava" style="cursor:pointer;" onclick="openUserProfile('${c.uid}')">
             <div style="flex:1;">
                 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:5px;">
@@ -38,16 +37,15 @@ export async function loadComments(db, auth, curProj, userData, isAdmin) {
     }).join('');
 }
 
-// ── Разрешить @email → никнейм перед сохранением ──
+// Разрешить @email → никнейм перед сохранением
 async function resolveEmailMentions(db, text) {
-    // Ищем @что-то@домен.зона (email pattern)
     const emailPattern = /@([\w.+-]+@[\w.-]+\.\w+)/g;
     let resolved = text;
     const matches = [...text.matchAll(emailPattern)];
     for (const m of matches) {
         const email = m[1];
         try {
-            const snap = await getDocs(query(collection(db,'users'), where('email','==',email)));
+            const snap = await getDocs(query(collection(db, 'users'), where('email', '==', email)));
             if (!snap.empty) {
                 const nick = snap.docs[0].data().nickname;
                 resolved = resolved.replace('@' + email, '@' + nick);
@@ -63,16 +61,15 @@ export function bindComments(db, auth, getState) {
         if (!curProj || !userData) return showToast('Войдите, чтобы оставить комментарий', 'error');
         const rawText = document.getElementById('comm-text').value.trim();
         if (!rawText) return;
-        // Разрешаем @email → @никнейм
+        
         const text = await resolveEmailMentions(db, rawText);
         await addDoc(collection(db, `releases/${curProj.id}/comments`), {
             uid: auth.currentUser.uid, nick: userData.nickname,
-            ava: userData.avatar||'', text, time: Date.now()
+            ava: userData.avatar || '', text, time: Date.now()
         });
         document.getElementById('comm-text').value = '';
         await loadComments(db, auth, curProj, userData, isAdmin);
         showToast('Комментарий отправлен!');
-        // Авто-ачивка
         await checkAndAwardAch(db, auth, userData, 'comment_1');
     };
 
