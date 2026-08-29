@@ -18,6 +18,9 @@ export let curProj = null;
 let viewTimer = null;
 let searchEnabled = false;
 
+// ============================================
+//  Загрузка релизов
+// ============================================
 export async function loadReleases(db, isAdmin) {
     const snap = await getDocs(query(collection(db, 'releases'), orderBy('timestamp', 'desc')));
     allRel = snap.docs.map(d => ({ id: d.id, ...d.data() }));
@@ -62,6 +65,9 @@ export function disableSearch() {
     if (inp) inp.value = '';
 }
 
+// ============================================
+//  Открытие страницы релиза
+// ============================================
 export async function openViewRelease(db, auth, id, userData, isAdmin) {
     clearTimeout(viewTimer);
     
@@ -74,6 +80,7 @@ export async function openViewRelease(db, auth, id, userData, isAdmin) {
     
     navigate('view');
 
+    // ✅ ВАЖНО: Передаём userData для отображения комментариев
     if (userData) {
         try {
             const viewedSnap = await getDoc(doc(db, `users/${auth.currentUser.uid}/viewed`, id));
@@ -93,14 +100,19 @@ export async function openViewRelease(db, auth, id, userData, isAdmin) {
         } catch (e) {}
     }
 
+    // ✅ Передаём userData в renderViewPage
     renderViewPage(db, auth, userData, isAdmin);
 }
 
+// ============================================
+//  Рендер страницы релиза
+// ============================================
 function renderViewPage(db, auth, userData, isAdmin) {
     const eps = curProj.episodes || [];
     const trailer = eps.find(e => e.type === 'trailer');
     const series = eps.filter(e => e.type !== 'trailer');
 
+    // Кнопки списков
     const userListBtns = userData ? `
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
             <button class="btn btn-outline btn-sm" id="btn-watch-later" onclick="toggleWatchList('later')">
@@ -111,6 +123,7 @@ function renderViewPage(db, auth, userData, isAdmin) {
             </button>
         </div>` : '';
 
+    // Кнопки админа
     const adminBtn = isAdmin
         ? `<button class="btn btn-blue btn-sm" onclick="openEpManager()"><i class="fas fa-film"></i> Серии</button>`
         : '';
@@ -118,9 +131,11 @@ function renderViewPage(db, auth, userData, isAdmin) {
     document.getElementById('v-info').innerHTML = `
         <div class="view-ivi-wrap">
             ${trailer ? `
-            <div class="trailer-section">
-                <div class="trailer-label"><i class="fas fa-play-circle"></i> Трейлер</div>
-                <div class="sws-player-container sws-trailer-size" id="sws-trailer-player"></div>
+            <div class="trailer-section" style="margin-bottom:24px;">
+                <div class="trailer-label" style="font-size:14px;font-weight:800;color:var(--accent);margin-bottom:10px;">
+                    <i class="fas fa-play-circle"></i> Трейлер
+                </div>
+                <div class="sws-player-container" id="sws-trailer-player"></div>
             </div>` : ''}
 
             <div class="view-meta-row">
@@ -146,8 +161,11 @@ function renderViewPage(db, auth, userData, isAdmin) {
 
             <div class="main-player-section">
                 <div class="sws-player-container" id="sws-main-player">
-                    <div style="display:flex;align-items:center;justify-content:center;height:100%;">
-                        <p style="color:var(--text-dim);">Выберите серию для просмотра</p>
+                    <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);">
+                        <div style="text-align:center;">
+                            <i class="fas fa-play-circle" style="font-size:3rem;margin-bottom:10px;color:var(--accent);"></i>
+                            <p>Выберите серию для просмотра</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -155,6 +173,7 @@ function renderViewPage(db, auth, userData, isAdmin) {
 
     updateLikesUI(auth, userData);
 
+    // Инициализация трейлера
     if (trailer?.url) {
         initPlayer('sws-trailer-player', {
             url: trailer.url,
@@ -163,10 +182,16 @@ function renderViewPage(db, auth, userData, isAdmin) {
         });
     }
 
+    // Сетка эпизодов
     renderEpGrid(series, isAdmin);
+
+    // ✅ ВАЖНО: Передаём userData в loadComments
     loadComments(db, auth, curProj, userData, isAdmin);
 }
 
+// ============================================
+//  Сетка эпизодов
+// ============================================
 function renderEpGrid(series, isAdmin) {
     const epList = document.getElementById('v-ep-list');
     if (!epList) {
@@ -190,10 +215,10 @@ function renderEpGrid(series, isAdmin) {
                     </span>
                     ${isAdmin ? `
                     <div class="ep-card-adm">
-                        <button class="ep-adm-btn" title="Редактировать" onclick="event.stopPropagation();editEp(${i})">
+                        <button class="ep-adm-btn ep-adm-btn--edit" title="Редактировать" onclick="event.stopPropagation();editEp(${i})">
                             <i class="fas fa-pen"></i>
                         </button>
-                        <button class="ep-adm-btn" title="Удалить" onclick="event.stopPropagation();delEp(${i})">
+                        <button class="ep-adm-btn ep-adm-btn--del" title="Удалить" onclick="event.stopPropagation();delEp(${i})">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>` : ''}
@@ -204,6 +229,9 @@ function renderEpGrid(series, isAdmin) {
     }
 }
 
+// ============================================
+//  Лайки
+// ============================================
 function updateLikesUI(auth, userData) {
     const uid = userData ? auth.currentUser?.uid : null;
     const lc = document.getElementById('v-like-cnt');
@@ -214,6 +242,9 @@ function updateLikesUI(auth, userData) {
     document.getElementById('btn-dislike')?.classList.toggle('active', !!(uid && (curProj?.dislikes || []).includes(uid)));
 }
 
+// ============================================
+//  Bind
+// ============================================
 export function bindReleases(db, auth, getState) {
     window.filterData = () => {
         const { isAdmin } = getState();

@@ -10,7 +10,8 @@ import {
 import { esc, showToast } from './core.js';
 import { checkAndAwardAch } from './achievements.js';
 
-// Загрузка и рендер комментариев
+// В js/comments.js — функция loadComments должна быть такой:
+
 export async function loadComments(db, auth, curProj, userData, isAdmin) {
     const snap = await getDocs(
         query(collection(db, `releases/${curProj.id}/comments`), orderBy('time', 'desc'))
@@ -35,6 +36,20 @@ export async function loadComments(db, auth, curProj, userData, isAdmin) {
             </div>
         </div>`;
     }).join('');
+    
+    // ✅ ВАЖНО: Показываем или скрываем форму комментариев в зависимости от авторизации
+    const authMsg = document.getElementById('comm-auth-msg');
+    const form = document.getElementById('comm-form');
+    
+    if (authMsg && form) {
+        if (userData) {
+            authMsg.style.display = 'none';
+            form.style.display = 'block';
+        } else {
+            authMsg.style.display = 'block';
+            form.style.display = 'none';
+        }
+    }
 }
 
 // Разрешить @email → никнейм перед сохранением
