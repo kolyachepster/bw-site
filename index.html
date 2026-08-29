@@ -118,22 +118,22 @@
     </section>
 
     <!-- ==================== VIEW RELEASE ==================== -->
-    <section id="view" class="section">
-        <button class="btn btn-outline" onclick="if(window.navigate) navigate('home')" style="margin-bottom:20px;">← К релизам</button>
-        <div id="v-info"></div>
-        <div style="background:var(--card-bg); padding:22px; border-radius:16px; border:1px solid var(--border); margin-top:20px;">
-            <h4 style="margin-bottom:15px; font-size:1.1rem;">Комментарии (<span id="comm-count">0</span>)</h4>
-            <div id="comm-auth-msg" class="unauth-msg">
-                <p style="margin-bottom:12px; font-weight:bold;">Войдите, чтобы оставить комментарий.</p>
-                <button class="btn btn-blue" onclick="if(window.navigate) navigate('profile')">Войти / Регистрация</button>
-            </div>
-            <div id="comm-form" style="display:none; margin-top:15px;">
-                <textarea id="comm-text" placeholder="Ваш комментарий... Используйте @email для упоминания пользователя" rows="3"></textarea>
-                <button class="btn" onclick="if(window.sendComment) sendComment()">Отправить</button>
-            </div>
-            <div id="comm-list" style="margin-top:18px;"></div>
+<section id="view" class="section">
+    <button class="btn btn-outline" onclick="if(window.navigate) navigate('home')" style="margin-bottom:20px;">← К релизам</button>
+    <div id="v-info"></div>
+    <div style="background:var(--card-bg); padding:22px; border-radius:16px; border:1px solid var(--border); margin-top:20px;">
+        <h4 style="margin-bottom:15px; font-size:1.1rem;">Комментарии (<span id="comm-count">0</span>)</h4>
+        <div id="comm-auth-msg" class="unauth-msg">
+            <p style="margin-bottom:12px; font-weight:bold;">Войдите, чтобы оставить комментарий.</p>
+            <button class="btn btn-blue" onclick="if(window.navigate) navigate('profile')">Войти / Регистрация</button>
         </div>
-    </section>
+        <div id="comm-form" style="display:none; margin-top:15px;">
+            <textarea id="comm-text" placeholder="Ваш комментарий... Используйте @email для упоминания пользователя" rows="3"></textarea>
+            <button class="btn" onclick="if(window.sendComment) sendComment()">Отправить</button>
+        </div>
+        <div id="comm-list" style="margin-top:18px;"></div>
+    </div>
+</section>
 
     <!-- ==================== PROFILE ==================== -->
     <section id="profile" class="section">
