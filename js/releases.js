@@ -78,9 +78,13 @@ export async function openViewRelease(db, auth, id, userData, isAdmin) {
     const idx = allRel.findIndex(x => x.id === id);
     if (idx >= 0) allRel[idx] = curProj;
     
+    // ✅ ВАЖНО: Сохраняем curProj в state
+    if (window.getState) {
+        window.getState().curProj = curProj;
+    }
+    
     navigate('view');
 
-    // ✅ ВАЖНО: Передаём userData для отображения комментариев
     if (userData) {
         try {
             const viewedSnap = await getDoc(doc(db, `users/${auth.currentUser.uid}/viewed`, id));
@@ -100,7 +104,6 @@ export async function openViewRelease(db, auth, id, userData, isAdmin) {
         } catch (e) {}
     }
 
-    // ✅ Передаём userData в renderViewPage
     renderViewPage(db, auth, userData, isAdmin);
 }
 

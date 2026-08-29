@@ -75,20 +75,27 @@ onAuthStateChanged(auth, async (user) => {
                 state.isAdmin = state.userData.role === 'admin';
                 state.isDub = state.userData.role === 'dub' || state.isAdmin;
                 state.isMod = state.userData.role === 'moderator';
+                
+                // ✅ ВАЖНО: Сохраняем userData в window для глобального доступа
+                window.__userData = state.userData;
+                
                 applyUserUI(state.userData, state.isAdmin, state.isDub);
                 renderAchProfile(state.userData);
                 
-                // ✅ ДОБАВЬТЕ ЭТУ СТРОЧКУ — если пользователь авторизован, сразу переходим в профиль
-                if (window.location.hash === '#profile' || window.location.hash === '') {
-                    window.navigate('profile');
+                // ✅ ВАЖНО: Если мы на странице релиза, перезагружаем комментарии
+                if (state.curProj) {
+                    const { loadComments } = await import('./comments.js');
+                    await loadComments(db, auth, state.curProj, state.userData, state.isAdmin);
                 }
                 
             } else {
                 resetUserUI();
+                window.__userData = null;
             }
         } catch (e) {
             console.error('Профиль:', e);
             resetUserUI();
+            window.__userData = null;
         }
     } else {
         state.userData = null;
@@ -96,6 +103,13 @@ onAuthStateChanged(auth, async (user) => {
         state.isDub = false;
         state.isMod = false;
         resetUserUI();
+        window.__userData = null;
+        
+        // ✅ ВАЖНО: Если мы на странице релиза, перезагружаем комментарии
+        if (state.curProj) {
+            const { loadComments } = await import('./comments.js');
+            await loadComments(db, auth, state.curProj, null, false);
+        }
     }
 
     await loadReleases(db, state.isAdmin);

@@ -1,5 +1,5 @@
 // ============================================================
-//  js/comments.js — Комментарии: @упоминания по email→никнейм
+//  js/comments.js — Комментарии
 // ============================================================
 
 import {
@@ -41,7 +41,8 @@ export async function loadComments(db, auth, curProj, userData, isAdmin) {
     const form = document.getElementById('comm-form');
     
     if (authMsg && form) {
-        if (userData) {
+        // Если пользователь авторизован (даже если userData не передан, но auth.currentUser есть)
+        if (auth.currentUser) {
             authMsg.style.display = 'none';
             form.style.display = 'block';
         } else {
@@ -71,8 +72,13 @@ async function resolveEmailMentions(db, text) {
 
 export function bindComments(db, auth, getState) {
     window.sendComment = async () => {
-        const { curProj, userData, isAdmin } = getState();
-        if (!curProj || !userData) return showToast('Войдите, чтобы оставить комментарий', 'error');
+        // ✅ ВАЖНО: Получаем userData через window.__userData
+        const userData = window.__userData || null;
+        const { curProj, isAdmin } = getState();
+        
+        if (!curProj) return showToast('Релиз не найден', 'error');
+        if (!userData) return showToast('Войдите, чтобы оставить комментарий', 'error');
+        
         const rawText = document.getElementById('comm-text').value.trim();
         if (!rawText) return;
         
@@ -89,7 +95,8 @@ export function bindComments(db, auth, getState) {
 
     window.delComm = async (id) => {
         if (!confirm('Удалить комментарий?')) return;
-        const { curProj, userData, isAdmin } = getState();
+        const { curProj, isAdmin } = getState();
+        const userData = window.__userData || null;
         await deleteDoc(doc(db, `releases/${curProj.id}/comments`, id));
         await loadComments(db, auth, curProj, userData, isAdmin);
         showToast('Удалено');
