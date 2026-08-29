@@ -494,16 +494,44 @@
     <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">Отмена</button>
 </div></div>
 
-<div id="m-team" class="modal"><div class="modal-content">
-    <h3 style="margin-bottom:18px; font-size:1.2rem; color:var(--accent);">Участник команды</h3>
-    <input type="hidden" id="ed-team-id">
-    <input type="text" id="ad-m-name" placeholder="Никнейм">
-    <input type="text" id="ad-m-role" placeholder="Роль (Дабер, Редактор...)">
-    <input type="text" id="ad-m-img" placeholder="URL фото">
-    <input type="text" id="ad-m-cat" placeholder="Категория">
-    <button class="btn btn-blue" style="width:100%; margin-top:5px;" onclick="if(window.saveTeam) saveTeam()">Сохранить</button>
-    <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">Отмена</button>
-</div></div>
+<div id="m-team" class="modal">
+    <div class="modal-content">
+        <h3 style="margin-bottom:20px; font-size:1.2rem; color:var(--accent);">
+            <i class="fas fa-user-plus"></i> Участник команды
+        </h3>
+        
+        <input type="hidden" id="ed-team-id">
+
+        <!-- Никнейм -->
+        <label for="ad-m-name">Никнейм / Имя *</label>
+        <input type="text" id="ad-m-name" placeholder="Например: cher" required>
+
+        <!-- Роль -->
+        <label for="ad-m-role">Роль в студии *</label>
+        <input type="text" id="ad-m-role" placeholder="Даббер, Редактор, Саунд-дизайнер..." required>
+
+        <!-- Фото -->
+        <label for="ad-m-img">Фото (URL)</label>
+        <input type="text" id="ad-m-img" placeholder="https://example.com/photo.jpg">
+        <p style="font-size:10px; color:var(--text-dim); margin-top:-10px; margin-bottom:16px;">
+            Вставьте прямую ссылку на картинку. Если пусто — будет сгенерирован аватар.
+        </p>
+
+        <!-- Категория -->
+        <label for="ad-m-cat">Категория (отдел)</label>
+        <input type="text" id="ad-m-cat" placeholder="Актёрский состав, Технический отдел...">
+        <p style="font-size:10px; color:var(--text-dim); margin-top:-10px; margin-bottom:16px;">
+            Например: "Основной состав" или "Звукорежиссура".
+        </p>
+
+        <button class="btn btn-blue" style="width:100%; margin-top:5px;" onclick="if(window.saveTeam) saveTeam()">
+            <i class="fas fa-save"></i> Сохранить
+        </button>
+        <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="if(window.closeModals) closeModals()">
+            Отмена
+        </button>
+    </div>
+</div>
 
 <div id="m-prof" class="modal"><div class="modal-content">
     <h3 style="margin-bottom:18px; font-size:1.2rem; color:var(--accent);">Настройки аккаунта</h3>
