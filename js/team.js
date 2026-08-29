@@ -29,7 +29,9 @@ function renderTeam() {
 
     wrapper.innerHTML = teamMembers.map(member => `
         <div class="team-card" onclick="openTeamPage('${member.id}')">
-            <img src="${esc(member.img) || PLACEHOLDER_TEAM_IMG}" alt="${esc(member.name)}" onerror="this.src='${PLACEHOLDER_TEAM_IMG}'">
+            <img src="${esc(member.img) || 'https://api.dicebear.com/7.x/identicon/svg'}" 
+                 alt="${esc(member.name)}" 
+                 onerror="this.src='https://api.dicebear.com/7.x/identicon/svg'">
             <div class="team-card-info">
                 <h3>${esc(member.name)}</h3>
                 <p>${esc(member.role)}</p>
@@ -69,47 +71,53 @@ export function bindTeam(db, getState) {
         navigate('team-page');
     };
 
-    window.openTeamModal = async (id = '') => {
-        document.getElementById('ed-team-id').value = id;
-        if (id) {
-            const member = teamMembers.find(m => m.id === id);
-            if (member) {
-                document.getElementById('ad-m-name').value = member.name || '';
-                document.getElementById('ad-m-role').value = member.role || '';
-                document.getElementById('ad-m-img').value = member.img || '';
-                document.getElementById('ad-m-cat').value = member.category || '';
-            }
-        } else {
-            ['ad-m-name', 'ad-m-role', 'ad-m-img', 'ad-m-cat'].forEach(id => {
-                document.getElementById(id).value = '';
-            });
-        }
-        document.getElementById('m-team').style.display = 'flex';
-    };
+    // В js/team.js — замените эти функции
 
-    window.saveTeam = async () => {
-        const { isAdmin } = getState();
-        const id = document.getElementById('ed-team-id').value;
-        const data = {
-            name: document.getElementById('ad-m-name').value.trim(),
-            role: document.getElementById('ad-m-role').value.trim(),
-            img: document.getElementById('ad-m-img').value.trim(),
-            category: document.getElementById('ad-m-cat').value.trim(),
-        };
-        
-        if (!data.name) return showToast('Введите имя!', 'error');
-        
-        if (!id) {
-            data.order = teamMembers.length;
-            await addDoc(collection(db, 'team'), data);
-        } else {
-            await updateDoc(doc(db, 'team', id), data);
+window.openTeamModal = async (id = '') => {
+    document.getElementById('ed-team-id').value = id;
+    
+    if (id) {
+        const member = teamMembers.find(m => m.id === id);
+        if (member) {
+            document.getElementById('ad-m-name').value = member.name || '';
+            document.getElementById('ad-m-role').value = member.role || '';
+            document.getElementById('ad-m-img').value = member.img || '';
+            document.getElementById('ad-m-cat').value = member.category || '';
         }
-        
-        closeModals();
-        await loadTeam(db);
-        showToast('Участник сохранён!');
+    } else {
+        ['ad-m-name', 'ad-m-role', 'ad-m-img', 'ad-m-cat'].forEach(id => {
+            document.getElementById(id).value = '';
+        });
+    }
+    
+    document.getElementById('m-team').style.display = 'flex';
+};
+
+window.saveTeam = async () => {
+    const { isAdmin } = getState();
+    const id = document.getElementById('ed-team-id').value;
+    
+    const data = {
+        name: document.getElementById('ad-m-name').value.trim(),
+        role: document.getElementById('ad-m-role').value.trim(),
+        img: document.getElementById('ad-m-img').value.trim(),
+        category: document.getElementById('ad-m-cat').value.trim(),
     };
+    
+    if (!data.name) return showToast('Введите имя!', 'error');
+    if (!data.role) return showToast('Введите роль!', 'error');
+    
+    if (!id) {
+        data.order = teamMembers.length;
+        await addDoc(collection(db, 'team'), data);
+    } else {
+        await updateDoc(doc(db, 'team', id), data);
+    }
+    
+    closeModals();
+    await loadTeam(db);
+    showToast('Участник сохранён!');
+};
 
     window.deleteTeamMember = async (id) => {
         if (!confirm('Удалить участника?')) return;
