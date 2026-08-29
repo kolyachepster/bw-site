@@ -78,11 +78,6 @@ export async function openViewRelease(db, auth, id, userData, isAdmin) {
     const idx = allRel.findIndex(x => x.id === id);
     if (idx >= 0) allRel[idx] = curProj;
     
-    // ✅ ВАЖНО: Сохраняем curProj в state
-    if (window.getState) {
-        window.getState().curProj = curProj;
-    }
-    
     navigate('view');
 
     if (userData) {
@@ -115,7 +110,6 @@ function renderViewPage(db, auth, userData, isAdmin) {
     const trailer = eps.find(e => e.type === 'trailer');
     const series = eps.filter(e => e.type !== 'trailer');
 
-    // Кнопки списков
     const userListBtns = userData ? `
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
             <button class="btn btn-outline btn-sm" id="btn-watch-later" onclick="toggleWatchList('later')">
@@ -126,7 +120,6 @@ function renderViewPage(db, auth, userData, isAdmin) {
             </button>
         </div>` : '';
 
-    // Кнопки админа
     const adminBtn = isAdmin
         ? `<button class="btn btn-blue btn-sm" onclick="openEpManager()"><i class="fas fa-film"></i> Серии</button>`
         : '';
@@ -176,7 +169,6 @@ function renderViewPage(db, auth, userData, isAdmin) {
 
     updateLikesUI(auth, userData);
 
-    // Инициализация трейлера
     if (trailer?.url) {
         initPlayer('sws-trailer-player', {
             url: trailer.url,
@@ -185,11 +177,8 @@ function renderViewPage(db, auth, userData, isAdmin) {
         });
     }
 
-    // Сетка эпизодов
     renderEpGrid(series, isAdmin);
-
-    // ✅ ВАЖНО: Передаём userData в loadComments
-    loadComments(db, auth, curProj, userData, isAdmin);
+    loadComments(db, auth, curProj);
 }
 
 // ============================================
@@ -246,9 +235,83 @@ function updateLikesUI(auth, userData) {
 }
 
 // ============================================
+//  Мои списки (watchlist, viewed)
+// ============================================
+window.loadMyLists = async function() {
+    const auth = window.auth;
+    const db = window.db;
+    
+    if (!auth || !auth.currentUser) return;
+    
+    const uid = auth.currentUser.uid;
+    const container = document.getElementById('my-lists-wrap');
+    if (!container) return;
+    
+    container.innerHTML = `<p style="font-size:12px;color:var(--text-dim);">Загрузка...</p>`;
+    
+    try {
+        // Загружаем watchlist
+        const wSnap = await getDocs(collection(db, `users/${uid}/watchlist`));
+        const all = wSnap.docs.map(d => d.data());
+        const later = all.filter(x => x.type === 'later');
+        const favorite = all.filter(x => x.type === 'favorite');
+        
+        // Загружаем viewed
+        const vSnap = await getDocs(collection(db, `users/${uid}/viewed`));
+        const viewed = vSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+        
+        // Дополняем viewed данными из allRel
+        for (const v of viewed) {
+            if (!v.title) {
+                const found = allRel.find(r => r.id === v.id);
+                v.title = found?.title || '(неизвестный релиз)';
+                v.img = found?.img || '';
+            }
+        }
+        
+        // Формируем HTML
+        const favHtml = favorite.length
+            ? `<div class="lists-grid">${favorite.map(r => `<div class="list-card" onclick="openView('${r.relId}')"><img src="${esc(r.img)}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="list-card-title">${esc(r.title)}</div></div>`).join('')}</div>`
+            : `<p class="list-empty">Пусто — нажмите ⭐ на странице релиза</p>`;
+        
+        const laterHtml = later.length
+            ? `<div class="lists-grid">${later.map(r => `<div class="list-card" onclick="openView('${r.relId}')"><img src="${esc(r.img)}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="list-card-title">${esc(r.title)}</div></div>`).join('')}</div>`
+            : `<p class="list-empty">Пусто — нажмите 🕐 на странице релиза</p>`;
+        
+        const viewedHtml = viewed.length
+            ? viewed.map(v => `<div class="viewed-row" onclick="openView('${v.id}')">
+                ${v.img ? `<img src="${esc(v.img)}" class="viewed-thumb" onerror="this.style.display='none'">` : ''}
+                <div style="flex:1;min-width:0;"><div class="viewed-title">${esc(v.title)}</div>
+                <div class="viewed-date"><i class="fas fa-check-circle" style="color:#22c55e;font-size:10px;"></i> ${new Date(v.at).toLocaleDateString('ru')}</div></div></div>`).join('')
+            : `<p class="list-empty">Пусто — смотрите релизы более 10 мин</p>`;
+        
+        container.innerHTML = `
+            <div style="margin-bottom:20px;">
+                <h5 style="margin-bottom:10px;">⭐ Избранное (${favorite.length})</h5>
+                ${favHtml}
+            </div>
+            <div style="margin-bottom:20px;">
+                <h5 style="margin-bottom:10px;">🕐 Буду смотреть (${later.length})</h5>
+                ${laterHtml}
+            </div>
+            <div>
+                <h5 style="margin-bottom:10px;">👁 Просмотрено (${viewed.length})</h5>
+                ${viewedHtml}
+            </div>`;
+    } catch (e) {
+        console.error('Ошибка загрузки списков:', e);
+        container.innerHTML = `<p style="color:#ef4444;font-size:13px;">Ошибка загрузки списков</p>`;
+    }
+};
+
+// ============================================
 //  Bind
 // ============================================
 export function bindReleases(db, auth, getState) {
+    // Сохраняем ссылки на db и auth для loadMyLists
+    window.db = db;
+    window.auth = auth;
+    
     window.filterData = () => {
         const { isAdmin } = getState();
         renderGrid(isAdmin);
@@ -424,63 +487,6 @@ export function bindReleases(db, auth, getState) {
         await deleteDoc(doc(db, 'releases', id));
         await loadReleases(db, isAdmin);
         showToast('Удалено');
-    };
-
-    window.loadMyLists = async () => {
-        const { userData } = getState();
-        if (!userData || !auth.currentUser) return;
-        
-        const uid = auth.currentUser.uid;
-        const container = document.getElementById('my-lists-wrap');
-        if (!container) return;
-        
-        container.innerHTML = `<p style="font-size:12px;color:var(--text-dim);">Загрузка...</p>`;
-        
-        try {
-            const wSnap = await getDocs(collection(db, `users/${uid}/watchlist`));
-            const all = wSnap.docs.map(d => d.data());
-            const later = all.filter(x => x.type === 'later');
-            const favorite = all.filter(x => x.type === 'favorite');
-            
-            const favHtml = favorite.length
-                ? `<div class="lists-grid">${favorite.map(r => `<div class="list-card" onclick="openView('${r.relId}')"><img src="${esc(r.img)}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="list-card-title">${esc(r.title)}</div></div>`).join('')}</div>`
-                : `<p class="list-empty">Пусто</p>`;
-            
-            const laterHtml = later.length
-                ? `<div class="lists-grid">${later.map(r => `<div class="list-card" onclick="openView('${r.relId}')"><img src="${esc(r.img)}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="list-card-title">${esc(r.title)}</div></div>`).join('')}</div>`
-                : `<p class="list-empty">Пусто</p>`;
-            
-            container.innerHTML = `
-                <div style="margin-bottom:20px;">
-                    <h5 style="margin-bottom:10px;">⭐ Избранное (${favorite.length})</h5>
-                    ${favHtml}
-                </div>
-                <div>
-                    <h5 style="margin-bottom:10px;">🕐 Буду смотреть (${later.length})</h5>
-                    ${laterHtml}
-                </div>`;
-        } catch (e) {
-            container.innerHTML = `<p style="color:#ef4444;font-size:13px;">Ошибка загрузки.</p>`;
-            console.error(e);
-        }
-    };
-
-    window.playEpByIdx = (idx) => {
-        const series = (curProj?.episodes || []).filter(e => e.type !== 'trailer');
-        const ep = series[idx];
-        if (!ep) return;
-        
-        const player = document.getElementById('sws-main-player');
-        if (player) {
-            player.innerHTML = `
-                <iframe class="swsp-iframe"
-                    src="${getEmbedUrl(ep.url)}"
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowfullscreen
-                    frameborder="0"
-                    style="position:absolute;inset:0;width:100%;height:100%;border:none;">
-                </iframe>`;
-        }
     };
 
     window.openPrivacy = async () => {
